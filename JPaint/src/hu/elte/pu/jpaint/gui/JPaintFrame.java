@@ -18,10 +18,10 @@ public class JPaintFrame extends JFrame {
         hookActionListeners();
         setMenu();
         setPageStart();
-        setPageCenter();
-        setPageEnd();
         setTools();
+        setPageCenter();
         setColorButtons();
+        //setPageEnd();
     }
 
     public void initFrame() {
@@ -69,6 +69,7 @@ public class JPaintFrame extends JFrame {
         add(workspace, BorderLayout.CENTER);
     }
 
+    // not used anymore
     private void setPageEnd() {
         JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         JLabel label = new JLabel("v.0.1");
@@ -83,21 +84,22 @@ public class JPaintFrame extends JFrame {
 
     private void setTools() {
         JPanel utilitiesPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        JPanel utilityButtonHolder = new JPanel(new GridLayout(0, 2));
+        JPanel utilityButtonHolder = new JPanel(new GridLayout(0, 1, 5, 5));
         utilitiesPanel.setSize(new Dimension(100, getHeight()));
-        utilitiesPanel.setBackground(Color.CYAN);
-        
         
         JButton pencilUtilityButton = new JButton("Pencil");
         pencilUtilityButton.setBackground(Color.yellow);
         JButton brushUtilityButton = new JButton("Brushy");
         brushUtilityButton.setBackground(Color.MAGENTA);
-        JButton eraserUtilitzButton = new JButton("Eraser");
-        eraserUtilitzButton.setBackground(Color.WHITE);
+        JButton eraserUtilityButton = new JButton("Eraser");
+        eraserUtilityButton.setBackground(Color.WHITE);
+        JButton paintBucketButton = new JButton("Bucket");
+        paintBucketButton.setBackground(Color.ORANGE);
         
         utilityButtonHolder.add(pencilUtilityButton);
         utilityButtonHolder.add(brushUtilityButton);
-        utilityButtonHolder.add(eraserUtilitzButton);
+        utilityButtonHolder.add(eraserUtilityButton);
+        utilityButtonHolder.add(paintBucketButton);
         
         utilitiesPanel.add(utilityButtonHolder);
         add(utilitiesPanel, BorderLayout.WEST);
@@ -105,7 +107,23 @@ public class JPaintFrame extends JFrame {
     }
 
     private void setColorButtons() {
-
+        JPanel colorsPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        
+        JButton redButton = new JButton("R");
+        redButton.setBackground(Color.RED);
+        JButton blueButton = new JButton("B");
+        blueButton.setBackground(Color.BLUE);
+        JButton yellowButton = new JButton("Y");
+        yellowButton.setBackground(Color.yellow);
+        JButton greenButton = new JButton("G");
+        greenButton.setBackground(Color.GREEN);
+        
+        colorsPanel.add(redButton);
+        colorsPanel.add(blueButton);
+        colorsPanel.add(yellowButton);
+        colorsPanel.add(greenButton);
+        
+        add(colorsPanel, BorderLayout.PAGE_END);
     }
 
     private void hookActionListeners() {
