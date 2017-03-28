@@ -11,7 +11,7 @@ Logo:
 ## Formatting: 
 For this project, the default NetBeans Java code formatting is used.
 (By default, pressing Alt+Shift+F should reformat the currently open source file.)
-Here are these conventions 
+Here are these conventions:
 
 ### Naming: 
 Camelcase naming for all variables and function names. 
@@ -19,7 +19,6 @@ Camelcase naming for all variables and function names.
 private int myInt = 0;
 private String myString = "text";
 private double myDouble = 2.1;
-
 
 public void writeMyText(String myText) {...}
 private void setPageCenter() {...}
@@ -32,8 +31,14 @@ public final static int WINDOW_WIDTH = 640;
 public final static int WINDOW_HEIGHT = 420;
 ```
 
+When naming constants, variables, and functions, try to give as detailed names as possible, without shortening words. 
+For example: 
+Instead of `int myNum`, use `int myNumber`. 
+Instead of `void retMat2Vec(...) {...}`, use `void returnMatrixOfTwoVectors(...) {...}`.
+
 ### Spacing and indents:
 The size of one tab indentation should be 4 spaces long. 
+
 There should be one space after a comma. 
 ```
 int myFunc(int x, int y) {...}
@@ -56,3 +61,7 @@ public void sample() {
 }
 ```
 
+### Classes:
+Class naming follows the CapitalCamelCase convention. 
+When defining a class, all public then private data members should come first. 
+They are followed by the public then the private functions.
