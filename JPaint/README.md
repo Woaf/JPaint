@@ -16,8 +16,6 @@ K&R style, such as:
 
 `
 public void sample() {
- 
     // code
-
 }
 `
