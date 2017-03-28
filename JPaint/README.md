@@ -15,7 +15,9 @@ For this project, the following code formatting is used
 K&R style, such as: 
 
 `
-public void sample() { 
+public void sample() {
+ 
     // code
+
 }
 `
