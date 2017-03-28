@@ -83,14 +83,23 @@ public class JPaintFrame extends JFrame {
 
     private void setTools() {
         JPanel utilitiesPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        JPanel utilityButtonHolder = new JPanel(new GridLayout(0, 2));
         utilitiesPanel.setSize(new Dimension(100, getHeight()));
         utilitiesPanel.setBackground(Color.CYAN);
         
-        JButton button = new JButton("Pencil");
-        button.setBackground(Color.yellow);
         
-        utilitiesPanel.add(button);
+        JButton pencilUtilityButton = new JButton("Pencil");
+        pencilUtilityButton.setBackground(Color.yellow);
+        JButton brushUtilityButton = new JButton("Brushy");
+        brushUtilityButton.setBackground(Color.MAGENTA);
+        JButton eraserUtilitzButton = new JButton("Eraser");
+        eraserUtilitzButton.setBackground(Color.WHITE);
         
+        utilityButtonHolder.add(pencilUtilityButton);
+        utilityButtonHolder.add(brushUtilityButton);
+        utilityButtonHolder.add(eraserUtilitzButton);
+        
+        utilitiesPanel.add(utilityButtonHolder);
         add(utilitiesPanel, BorderLayout.WEST);
         
     }
