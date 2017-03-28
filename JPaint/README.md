@@ -33,7 +33,8 @@ public final static int WINDOW_HEIGHT = 420;
 
 When naming constants, variables, and functions, try to give as detailed names as possible, without shortening words. 
 For example: 
-Instead of `int myNum`, use `int myNumber`. 
+Instead of `int myNum`, use `int myNumber`.
+
 Instead of `void retMat2Vec(...) {...}`, use `void returnMatrixOfTwoVectors(...) {...}`.
 
 ### Spacing and indents:
