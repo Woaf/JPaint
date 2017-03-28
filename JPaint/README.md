@@ -16,7 +16,7 @@ Here are these conventions:
 ### Naming: 
 Camelcase naming for all variables and function names. 
 ```
-private int myInt = 0;
+private int myInteger = 0;
 private String myString = "text";
 private double myDouble = 2.1;
 
@@ -43,11 +43,11 @@ The size of one tab indentation should be 4 spaces long.
 
 There should be one space after a comma. 
 ```
-int myFunc(int x, int y) {...}
+int myFunction(int x, int y) {...}
 ```
 There should be one space after each function, right in front of the opening braces of the function. 
 ```
-double myFunc(double x, double y) {...}
+double myFunction(double x, double y) {...}
 ```
 There should be one space before and after each value defining "=" mark. 
 ```
