@@ -13,8 +13,7 @@ For this project, the following code formatting is used
 
 ### Braces: 
 K&R style, such as: 
+
 `public void sample() { 
-
     // code
-
 }`
