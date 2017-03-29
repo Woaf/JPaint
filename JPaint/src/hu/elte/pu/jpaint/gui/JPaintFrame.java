@@ -1,5 +1,6 @@
 package hu.elte.pu.jpaint.gui;
 
+import hu.elte.pu.jpaint.gui.constants.FunConstants;
 import static hu.elte.pu.jpaint.gui.constants.WindowConstants.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -8,7 +9,13 @@ import javax.swing.border.*;
 
 public class JPaintFrame extends JFrame {
 
+    private final FunConstants fun = new FunConstants();
+    private final String TITLE = fun.returnOneFunString();
     private JPanel workspace = new JPanel();
+    private final Font jPaintMenuFont = new Font(Font.SANS_SERIF, Font.ITALIC, 16);
+    private final Font jPaintSubMenuFont = new Font(Font.SANS_SERIF, Font.PLAIN, 12);
+    private final Font jPaintUtilityFont = new Font(Font.DIALOG, Font.PLAIN, 12);
+    private final Color utilityButtonColor = new Color(255, 222, 173);
     
     private ActionListener createCanvas;
     private ActionListener closeWindow;
@@ -21,23 +28,26 @@ public class JPaintFrame extends JFrame {
         setTools();
         setPageCenter();
         setColorButtons();
-        //setPageEnd();
     }
 
     public void initFrame() {
-        setTitle(WINDOW_TITLE);
+        setTitle(TITLE);
         setSize(new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT));
         setLayout(new BorderLayout());
         setLocationRelativeTo(null);
-        setResizable(false);
+        setResizable(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
     private void setMenu() {
         JMenuBar menuBar = new JMenuBar();
         JMenu jpaintMenu = new JMenu(MENU_TEXT);
+        jpaintMenu.setFont(jPaintMenuFont);
         JMenuItem newCanvas = new JMenuItem(NEW_CANVAS);
         JMenuItem closeApp = new JMenuItem(CLOSE_APP);
+        
+        newCanvas.setFont(jPaintSubMenuFont);
+        closeApp.setFont(jPaintSubMenuFont);
         
         newCanvas.addActionListener(createCanvas);
         closeApp.addActionListener(closeWindow);
@@ -52,7 +62,7 @@ public class JPaintFrame extends JFrame {
 
     private void setPageStart() {
         JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        JLabel frameHeader = new JLabel(WINDOW_TITLE);
+        JLabel frameHeader = new JLabel(TITLE);
         Font font = new Font(Font.SANS_SERIF, Font.BOLD, 26);
 
         frameHeader.setFont(font);
@@ -88,18 +98,30 @@ public class JPaintFrame extends JFrame {
         utilitiesPanel.setSize(new Dimension(100, getHeight()));
         
         JButton pencilUtilityButton = new JButton("Pencil");
-        pencilUtilityButton.setBackground(Color.yellow);
+        pencilUtilityButton.setFont(jPaintUtilityFont);
+        pencilUtilityButton.setBackground(utilityButtonColor);
         JButton brushUtilityButton = new JButton("Brushy");
-        brushUtilityButton.setBackground(Color.MAGENTA);
+        brushUtilityButton.setFont(jPaintUtilityFont);
+        brushUtilityButton.setBackground(utilityButtonColor);
         JButton eraserUtilityButton = new JButton("Eraser");
-        eraserUtilityButton.setBackground(Color.WHITE);
+        eraserUtilityButton.setFont(jPaintUtilityFont);
+        eraserUtilityButton.setBackground(utilityButtonColor);
         JButton paintBucketButton = new JButton("Bucket");
-        paintBucketButton.setBackground(Color.ORANGE);
+        paintBucketButton.setFont(jPaintUtilityFont);
+        paintBucketButton.setBackground(utilityButtonColor);
+        JButton rectangleUtilityTool = new JButton("Rectangle");
+        rectangleUtilityTool.setFont(jPaintUtilityFont);
+        rectangleUtilityTool.setBackground(utilityButtonColor);
+        JButton circleUtilityButton = new JButton("Circle");
+        circleUtilityButton.setFont(jPaintUtilityFont);
+        circleUtilityButton.setBackground(utilityButtonColor);
         
         utilityButtonHolder.add(pencilUtilityButton);
         utilityButtonHolder.add(brushUtilityButton);
         utilityButtonHolder.add(eraserUtilityButton);
         utilityButtonHolder.add(paintBucketButton);
+        utilityButtonHolder.add(rectangleUtilityTool);
+        utilityButtonHolder.add(circleUtilityButton);
         
         utilitiesPanel.add(utilityButtonHolder);
         add(utilitiesPanel, BorderLayout.WEST);
@@ -125,12 +147,21 @@ public class JPaintFrame extends JFrame {
         
         add(colorsPanel, BorderLayout.PAGE_END);
     }
+    
+    private void createDrawableCanvas() {
+        JPanel drawableCanvas = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        drawableCanvas.setSize(new Dimension(300, 300));
+        drawableCanvas.setBackground(Color.WHITE);
+        
+        add(drawableCanvas, FlowLayout.CENTER);
+        workspace.revalidate();
+    }
 
     private void hookActionListeners() {
         createCanvas = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                System.out.println("New canvas clicked.");
+                createDrawableCanvas();
             }
         };
         
