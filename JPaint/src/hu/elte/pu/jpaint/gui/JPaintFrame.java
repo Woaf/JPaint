@@ -182,7 +182,15 @@ public class JPaintFrame extends JFrame {
         }
         revalidate();
     }
-
+    
+    // check if canvas is null
+    private void clearImage() {
+        this.getContentPane().remove(canvas);
+        canvas = null;
+        repaint();
+    }
+    
+    // ACTION LISTENERS
     private void hookActionListeners() {
         createCanvas = new ActionListener() {
             @Override
@@ -211,6 +219,13 @@ public class JPaintFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 drawWithPencil();
+            }
+        };
+        
+        closeImage = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                clearImage();
             }
         };
     }
