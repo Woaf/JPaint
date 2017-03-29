@@ -185,9 +185,13 @@ public class JPaintFrame extends JFrame {
     
     // check if canvas is null
     private void clearImage() {
-        this.getContentPane().remove(canvas);
-        canvas = null;
-        repaint();
+        if(this.getContentPane().getComponentCount() < 6) {
+            System.out.println("you dumb fuck");
+        } else {
+            this.getContentPane().remove(canvas);
+            canvas = null;
+            repaint();
+        }
     }
     
     // ACTION LISTENERS
