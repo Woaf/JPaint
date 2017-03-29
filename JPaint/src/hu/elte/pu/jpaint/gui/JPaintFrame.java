@@ -10,7 +10,6 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.*;
-import javax.swing.plaf.basic.BasicSliderUI;
 
 public class JPaintFrame extends JFrame {
 
@@ -178,6 +177,8 @@ public class JPaintFrame extends JFrame {
             canvas.add(maePic);
         } catch (IOException ex) {
             System.out.println(ex);
+        } catch (NullPointerException ex) {
+            System.out.println("there is no canvas to draw on :c");
         }
         revalidate();
     }
