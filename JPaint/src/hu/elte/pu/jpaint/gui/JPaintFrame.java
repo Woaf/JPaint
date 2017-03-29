@@ -4,6 +4,10 @@ import hu.elte.pu.jpaint.gui.constants.FunConstants;
 import static hu.elte.pu.jpaint.gui.constants.WindowConstants.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.*;
 import javax.swing.plaf.basic.BasicSliderUI;
@@ -167,8 +171,14 @@ public class JPaintFrame extends JFrame {
     
     private void drawWithPencil() {
         //this is only for testing
-        JButton button = new JButton("FUCK.DA.POLICE");
-        this.canvas.add(button);
+        BufferedImage mae;
+        try {
+            mae = ImageIO.read(new File("src/hu/elte/pu/jpaint/gui/constants/mae.png"));
+            JLabel maePic = new JLabel(new ImageIcon(mae));
+            canvas.add(maePic);
+        } catch (IOException ex) {
+            System.out.println(ex);
+        }
         revalidate();
     }
 
