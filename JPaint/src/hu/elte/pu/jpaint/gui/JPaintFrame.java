@@ -187,11 +187,16 @@ public class JPaintFrame extends JFrame {
 
     // check if canvas is null
     private void clearImage() {
-        this.getContentPane().remove(canvas);
+        if(imageTitle != "JPaint") {
+            int clearCanvasConfirmation = JOptionPane.showConfirmDialog(null, "Are you sure you want to close it?", "You seem to have an open canvas.", JOptionPane.YES_NO_OPTION);
+            if(clearCanvasConfirmation == JOptionPane.YES_OPTION){
+                this.getContentPane().remove(canvas);
         canvas = null;
         imageTitle = "JPaint";
         frameHeader.setText(imageTitle);
         repaint();
+            }
+        }
     }
 
     // ACTION LISTENERS
