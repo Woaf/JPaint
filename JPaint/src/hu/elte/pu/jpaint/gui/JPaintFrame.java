@@ -20,13 +20,13 @@ public class JPaintFrame extends JFrame {
     private final Font jPaintSubMenuFont = new Font(Font.SANS_SERIF, Font.PLAIN, 12);
     private final Font jPaintUtilityFont = new Font(Font.DIALOG, Font.PLAIN, 12);
     private final Color utilityButtonColor = new Color(255, 222, 173);
-    
+
     private ActionListener createCanvas;
     private ActionListener clearCanvas;
     private ActionListener saveImage;
     private ActionListener closeImage;
     private ActionListener closeWindow;
-    
+
     private ActionListener pencilAction;
 
     public JPaintFrame() throws HeadlessException {
@@ -57,19 +57,19 @@ public class JPaintFrame extends JFrame {
         JMenuItem saveImage = new JMenuItem(SAVE_IMAGE);
         JMenuItem closeImage = new JMenuItem(CLOSE_IMAGE);
         JMenuItem closeApp = new JMenuItem(CLOSE_APP);
-        
+
         newCanvas.setFont(jPaintSubMenuFont);
         clearCanvas.setFont(jPaintSubMenuFont);
         saveImage.setFont(jPaintSubMenuFont);
         closeImage.setFont(jPaintSubMenuFont);
         closeApp.setFont(jPaintSubMenuFont);
-        
+
         newCanvas.addActionListener(createCanvas);
         clearCanvas.addActionListener(this.clearCanvas);
         saveImage.addActionListener(this.saveImage);
         closeImage.addActionListener(this.closeImage);
         closeApp.addActionListener(closeWindow);
-        
+
         jpaintMenu.add(newCanvas);
         jpaintMenu.add(clearCanvas);
         jpaintMenu.add(saveImage);
@@ -97,7 +97,7 @@ public class JPaintFrame extends JFrame {
     private void setPageCenter() {
         JPanel canvasHolder = new JPanel(new FlowLayout(FlowLayout.CENTER));
         canvasHolder.setBackground(Color.DARK_GRAY);
-        
+
         add(canvasHolder, BorderLayout.CENTER);
     }
 
@@ -105,7 +105,7 @@ public class JPaintFrame extends JFrame {
         JPanel utilitiesPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         JPanel utilityButtonHolder = new JPanel(new GridLayout(0, 1, 5, 5));
         utilitiesPanel.setSize(new Dimension(100, getHeight()));
-        
+
         JButton pencilUtilityButton = new JButton("Pencil");
         pencilUtilityButton.setFont(jPaintUtilityFont);
         pencilUtilityButton.setBackground(utilityButtonColor);
@@ -125,22 +125,22 @@ public class JPaintFrame extends JFrame {
         JButton circleUtilityButton = new JButton("Circle");
         circleUtilityButton.setFont(jPaintUtilityFont);
         circleUtilityButton.setBackground(utilityButtonColor);
-        
+
         utilityButtonHolder.add(pencilUtilityButton);
         utilityButtonHolder.add(brushUtilityButton);
         utilityButtonHolder.add(eraserUtilityButton);
         utilityButtonHolder.add(paintBucketButton);
         utilityButtonHolder.add(rectangleUtilityTool);
         utilityButtonHolder.add(circleUtilityButton);
-        
+
         utilitiesPanel.add(utilityButtonHolder);
         add(utilitiesPanel, BorderLayout.WEST);
-        
+
     }
 
     private void setColorButtons() {
         JPanel colorsPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        
+
         JButton redButton = new JButton("R");
         redButton.setBackground(Color.RED);
         JButton blueButton = new JButton("B");
@@ -149,25 +149,25 @@ public class JPaintFrame extends JFrame {
         yellowButton.setBackground(Color.yellow);
         JButton greenButton = new JButton("G");
         greenButton.setBackground(Color.GREEN);
-        
+
         colorsPanel.add(redButton);
         colorsPanel.add(blueButton);
         colorsPanel.add(yellowButton);
         colorsPanel.add(greenButton);
-        
+
         add(colorsPanel, BorderLayout.PAGE_END);
     }
-    
+
     // MOVE TO LOGIC 
     private void createDrawableCanvas() {
         canvas = new JPanel(new FlowLayout(FlowLayout.CENTER));
         canvas.setSize(200, 200);
         canvas.setBackground(Color.WHITE);
-        
+
         add(canvas, FlowLayout.CENTER);
         revalidate();
     }
-    
+
     private void drawWithPencil() {
         //this is only for testing
         BufferedImage mae;
@@ -182,18 +182,14 @@ public class JPaintFrame extends JFrame {
         }
         revalidate();
     }
-    
+
     // check if canvas is null
     private void clearImage() {
-        if(this.getContentPane().getComponentCount() < 6) {
-            System.out.println("you dumb fuck");
-        } else {
-            this.getContentPane().remove(canvas);
-            canvas = null;
-            repaint();
-        }
+        this.getContentPane().remove(canvas);
+        canvas = null;
+        repaint();
     }
-    
+
     // ACTION LISTENERS
     private void hookActionListeners() {
         createCanvas = new ActionListener() {
@@ -202,7 +198,7 @@ public class JPaintFrame extends JFrame {
                 createDrawableCanvas();
             }
         };
-        
+
         closeWindow = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
@@ -211,21 +207,21 @@ public class JPaintFrame extends JFrame {
                 }
             }
         };
-        
+
         clearCanvas = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 canvas.removeAll();
             }
         };
-        
+
         pencilAction = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 drawWithPencil();
             }
         };
-        
+
         closeImage = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
