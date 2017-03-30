@@ -14,7 +14,8 @@ For this project, the default NetBeans Java code formatting is used.
 Here are these conventions:
 
 ### Naming: 
-Camelcase naming for all variables and function names. 
+Camelcase naming for all variables and function names.
+The names should reflect their purpose appropriately (as much as it is possible / necessary).
 ```
 private int myInteger = 0;
 private String myString = "text";

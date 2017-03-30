@@ -9,12 +9,11 @@ import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.border.*;
 
 public class JPaintFrame extends JFrame {
 
     private final FunConstants fun = new FunConstants();
-    private final String TITLE = fun.returnOneFunString();
+    private final String IMAGE_TITLE = "JPaint";
     private JPanel canvas;
     private final Font jPaintMenuFont = new Font(Font.SANS_SERIF, Font.ITALIC, 16);
     private final Font jPaintSubMenuFont = new Font(Font.SANS_SERIF, Font.PLAIN, 12);
@@ -40,7 +39,7 @@ public class JPaintFrame extends JFrame {
     }
 
     public void initFrame() {
-        setTitle(TITLE);
+        setTitle(WINDOW_TITLE);
         setSize(new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT));
         setLayout(new BorderLayout());
         setLocationRelativeTo(null);
@@ -83,7 +82,7 @@ public class JPaintFrame extends JFrame {
 
     private void setPageStart() {
         JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        JLabel frameHeader = new JLabel(TITLE);
+        JLabel frameHeader = new JLabel(IMAGE_TITLE);
         Font font = new Font(Font.SANS_SERIF, Font.BOLD, 26);
 
         frameHeader.setFont(font);
