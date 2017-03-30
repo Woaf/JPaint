@@ -13,8 +13,9 @@ import javax.swing.*;
 public class JPaintFrame extends JFrame {
 
     private final FunConstants fun = new FunConstants();
-    private final String IMAGE_TITLE = "JPaint";
+    private String imageTitle = "JPaint";
     private JPanel canvas;
+    private JLabel frameHeader = new JLabel();
     private final Font jPaintMenuFont = new Font(Font.SANS_SERIF, Font.ITALIC, 16);
     private final Font jPaintSubMenuFont = new Font(Font.SANS_SERIF, Font.PLAIN, 12);
     private final Font jPaintUtilityFont = new Font(Font.DIALOG, Font.PLAIN, 12);
@@ -82,7 +83,7 @@ public class JPaintFrame extends JFrame {
 
     private void setPageStart() {
         JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        JLabel frameHeader = new JLabel(IMAGE_TITLE);
+        frameHeader.setText(imageTitle);
         Font font = new Font(Font.SANS_SERIF, Font.BOLD, 26);
 
         frameHeader.setFont(font);
@@ -159,10 +160,12 @@ public class JPaintFrame extends JFrame {
 
     // MOVE TO LOGIC 
     private void createDrawableCanvas() {
+        imageTitle = JOptionPane.showInputDialog("Please enter the name of your file:");
+        frameHeader.setText(imageTitle);
         canvas = new JPanel(new FlowLayout(FlowLayout.CENTER));
         canvas.setSize(200, 200);
         canvas.setBackground(Color.WHITE);
-
+        
         add(canvas, FlowLayout.CENTER);
         revalidate();
     }
@@ -186,6 +189,8 @@ public class JPaintFrame extends JFrame {
     private void clearImage() {
         this.getContentPane().remove(canvas);
         canvas = null;
+        imageTitle = "JPaint";
+        frameHeader.setText(imageTitle);
         repaint();
     }
 
