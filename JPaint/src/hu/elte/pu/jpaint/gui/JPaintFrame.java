@@ -105,23 +105,23 @@ public class JPaintFrame extends JFrame {
         JPanel utilityButtonHolder = new JPanel(new GridLayout(0, 1, 5, 5));
         utilitiesPanel.setSize(new Dimension(100, getHeight()));
 
-        JButton pencilUtilityButton = new JButton("Pencil");
+        JButton pencilUtilityButton = new JButton(PENCIL_UTILITY_TEXT);
         pencilUtilityButton.setFont(jPaintUtilityFont);
         pencilUtilityButton.setBackground(utilityButtonColor);
         pencilUtilityButton.addActionListener(pencilAction);
-        JButton brushUtilityButton = new JButton("Brushy");
+        JButton brushUtilityButton = new JButton(BRUSH_UTILITY_TEXT);
         brushUtilityButton.setFont(jPaintUtilityFont);
         brushUtilityButton.setBackground(utilityButtonColor);
-        JButton eraserUtilityButton = new JButton("Eraser");
+        JButton eraserUtilityButton = new JButton(ERASER_UTILITY_TEXT);
         eraserUtilityButton.setFont(jPaintUtilityFont);
         eraserUtilityButton.setBackground(utilityButtonColor);
-        JButton paintBucketButton = new JButton("Bucket");
+        JButton paintBucketButton = new JButton(BUCKET_UTILITY_TEXT);
         paintBucketButton.setFont(jPaintUtilityFont);
         paintBucketButton.setBackground(utilityButtonColor);
-        JButton rectangleUtilityTool = new JButton("Rectangle");
+        JButton rectangleUtilityTool = new JButton(RECTANGLE_UTILITY_TEXT);
         rectangleUtilityTool.setFont(jPaintUtilityFont);
         rectangleUtilityTool.setBackground(utilityButtonColor);
-        JButton circleUtilityButton = new JButton("Circle");
+        JButton circleUtilityButton = new JButton(CIRCLE_UTILITY_TEXT);
         circleUtilityButton.setFont(jPaintUtilityFont);
         circleUtilityButton.setBackground(utilityButtonColor);
 
@@ -140,13 +140,13 @@ public class JPaintFrame extends JFrame {
     private void setColorButtons() {
         JPanel colorsPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 
-        JButton redButton = new JButton("R");
+        JButton redButton = new JButton(" ");
         redButton.setBackground(Color.RED);
-        JButton blueButton = new JButton("B");
+        JButton blueButton = new JButton(" ");
         blueButton.setBackground(Color.BLUE);
-        JButton yellowButton = new JButton("Y");
+        JButton yellowButton = new JButton(" ");
         yellowButton.setBackground(Color.yellow);
-        JButton greenButton = new JButton("G");
+        JButton greenButton = new JButton(" ");
         greenButton.setBackground(Color.GREEN);
 
         colorsPanel.add(redButton);
