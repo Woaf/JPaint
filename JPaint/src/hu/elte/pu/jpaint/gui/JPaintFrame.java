@@ -10,16 +10,21 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
+/**
+ * This "JPaintFrame" class defines the main outline of the JPaint application,
+ * and extends the java.swing.JFrame class for simple implementation.
+ *
+ * @author Bálint Fazekas
+ * @version 0.1
+ */
 public class JPaintFrame extends JFrame {
 
-    private final FunConstants fun = new FunConstants();
+    /**
+     *
+     */
     private String imageTitle = "JPaint";
-    private JPanel canvas;
+    private JPanel canvas = null;
     private JLabel frameHeader = new JLabel();
-    private final Font jPaintMenuFont = new Font(Font.SANS_SERIF, Font.ITALIC, 16);
-    private final Font jPaintSubMenuFont = new Font(Font.SANS_SERIF, Font.PLAIN, 12);
-    private final Font jPaintUtilityFont = new Font(Font.DIALOG, Font.PLAIN, 12);
-    private final Color utilityButtonColor = new Color(255, 222, 173);
 
     private ActionListener createCanvas;
     private ActionListener clearCanvas;
@@ -28,7 +33,19 @@ public class JPaintFrame extends JFrame {
     private ActionListener closeWindow;
 
     private ActionListener pencilAction;
+    private ActionListener brushAction;
+    private ActionListener eraserAction;
+    private ActionListener bucketAction;
+    private ActionListener rectangleAction;
+    private ActionListener circleAction;
 
+    /**
+     * The constructor of this class sets up the window of the JPaint
+     * application. It uses several methods to set up each component of the user
+     * interface.
+     *
+     * @throws HeadlessException
+     */
     public JPaintFrame() throws HeadlessException {
         initFrame();
         hookActionListeners();
@@ -51,18 +68,18 @@ public class JPaintFrame extends JFrame {
     private void setMenu() {
         JMenuBar menuBar = new JMenuBar();
         JMenu jpaintMenu = new JMenu(MENU_TEXT);
-        jpaintMenu.setFont(jPaintMenuFont);
+        jpaintMenu.setFont(JPAINT_MENU_FONT);
         JMenuItem newCanvas = new JMenuItem(NEW_CANVAS);
         JMenuItem clearCanvas = new JMenuItem(CLEAR_CANVAS);
         JMenuItem saveImage = new JMenuItem(SAVE_IMAGE);
         JMenuItem closeImage = new JMenuItem(CLOSE_IMAGE);
         JMenuItem closeApp = new JMenuItem(CLOSE_APP);
 
-        newCanvas.setFont(jPaintSubMenuFont);
-        clearCanvas.setFont(jPaintSubMenuFont);
-        saveImage.setFont(jPaintSubMenuFont);
-        closeImage.setFont(jPaintSubMenuFont);
-        closeApp.setFont(jPaintSubMenuFont);
+        newCanvas.setFont(JPAINT_SUBMENU_FONT);
+        clearCanvas.setFont(JPAINT_SUBMENU_FONT);
+        saveImage.setFont(JPAINT_SUBMENU_FONT);
+        closeImage.setFont(JPAINT_SUBMENU_FONT);
+        closeApp.setFont(JPAINT_SUBMENU_FONT);
 
         newCanvas.addActionListener(createCanvas);
         clearCanvas.addActionListener(this.clearCanvas);
@@ -107,24 +124,24 @@ public class JPaintFrame extends JFrame {
         utilitiesPanel.setSize(new Dimension(100, getHeight()));
 
         JButton pencilUtilityButton = new JButton(PENCIL_UTILITY_TEXT);
-        pencilUtilityButton.setFont(jPaintUtilityFont);
-        pencilUtilityButton.setBackground(utilityButtonColor);
+        pencilUtilityButton.setFont(JPAINT_UTILITY_FONT);
+        pencilUtilityButton.setBackground(UTILITY_BUTTON_COLOR);
         pencilUtilityButton.addActionListener(pencilAction);
         JButton brushUtilityButton = new JButton(BRUSH_UTILITY_TEXT);
-        brushUtilityButton.setFont(jPaintUtilityFont);
-        brushUtilityButton.setBackground(utilityButtonColor);
+        brushUtilityButton.setFont(JPAINT_UTILITY_FONT);
+        brushUtilityButton.setBackground(UTILITY_BUTTON_COLOR);
         JButton eraserUtilityButton = new JButton(ERASER_UTILITY_TEXT);
-        eraserUtilityButton.setFont(jPaintUtilityFont);
-        eraserUtilityButton.setBackground(utilityButtonColor);
+        eraserUtilityButton.setFont(JPAINT_UTILITY_FONT);
+        eraserUtilityButton.setBackground(UTILITY_BUTTON_COLOR);
         JButton paintBucketButton = new JButton(BUCKET_UTILITY_TEXT);
-        paintBucketButton.setFont(jPaintUtilityFont);
-        paintBucketButton.setBackground(utilityButtonColor);
+        paintBucketButton.setFont(JPAINT_UTILITY_FONT);
+        paintBucketButton.setBackground(UTILITY_BUTTON_COLOR);
         JButton rectangleUtilityTool = new JButton(RECTANGLE_UTILITY_TEXT);
-        rectangleUtilityTool.setFont(jPaintUtilityFont);
-        rectangleUtilityTool.setBackground(utilityButtonColor);
+        rectangleUtilityTool.setFont(JPAINT_UTILITY_FONT);
+        rectangleUtilityTool.setBackground(UTILITY_BUTTON_COLOR);
         JButton circleUtilityButton = new JButton(CIRCLE_UTILITY_TEXT);
-        circleUtilityButton.setFont(jPaintUtilityFont);
-        circleUtilityButton.setBackground(utilityButtonColor);
+        circleUtilityButton.setFont(JPAINT_UTILITY_FONT);
+        circleUtilityButton.setBackground(UTILITY_BUTTON_COLOR);
 
         utilityButtonHolder.add(pencilUtilityButton);
         utilityButtonHolder.add(brushUtilityButton);
@@ -140,18 +157,17 @@ public class JPaintFrame extends JFrame {
 
     private void setColorButtons() {
         JPanel colorsPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        Dimension colorButtonDimension = new Dimension(20, 20);
         JButton redButton = new JButton();
-        redButton.setPreferredSize(colorButtonDimension);
+        redButton.setPreferredSize(COLOR_BUTTON_DIMENSIONS);
         redButton.setBackground(Color.RED);
         JButton blueButton = new JButton();
-        blueButton.setPreferredSize(colorButtonDimension);
+        blueButton.setPreferredSize(COLOR_BUTTON_DIMENSIONS);
         blueButton.setBackground(Color.BLUE);
         JButton yellowButton = new JButton();
-        yellowButton.setPreferredSize(colorButtonDimension);
+        yellowButton.setPreferredSize(COLOR_BUTTON_DIMENSIONS);
         yellowButton.setBackground(Color.yellow);
         JButton greenButton = new JButton();
-        greenButton.setPreferredSize(colorButtonDimension);
+        greenButton.setPreferredSize(COLOR_BUTTON_DIMENSIONS);
         greenButton.setBackground(Color.GREEN);
 
         colorsPanel.add(redButton);
@@ -164,7 +180,11 @@ public class JPaintFrame extends JFrame {
 
     // MOVE TO LOGIC 
     private void createDrawableCanvas() {
-        imageTitle = JOptionPane.showInputDialog("Please enter the name of your file:");
+        imageTitle = JOptionPane.showInputDialog(IMAGE_NAME_MESSAGE);
+        if(imageTitle.equals("")){
+            JOptionPane.showMessageDialog(this, "Please enter a valid name");
+            createDrawableCanvas();
+        }
         frameHeader.setText(imageTitle);
         canvas = new JPanel(new FlowLayout(FlowLayout.CENTER));
         canvas.setSize(200, 200);
@@ -172,6 +192,28 @@ public class JPaintFrame extends JFrame {
 
         add(canvas, FlowLayout.CENTER);
         revalidate();
+    }
+
+    private void clearCanvas() {
+        if (canvas != null) {
+            canvas.removeAll();
+            repaint();
+        }
+    }
+
+    private void closeCanvas() {
+        if (canvas != null) {
+            if (imageTitle != "JPaint") {
+                int clearCanvasConfirmation = JOptionPane.showConfirmDialog(null, CLEAR_IMAGE_WINDOW_MESSAGE, CLEAR_IMAGE_WINDOW_TITLE, JOptionPane.YES_NO_OPTION);
+                if (clearCanvasConfirmation == JOptionPane.YES_OPTION) {
+                    this.getContentPane().remove(canvas);
+                    canvas = null;
+                    imageTitle = "JPaint";
+                    frameHeader.setText(imageTitle);
+                    repaint();
+                }
+            }
+        }
     }
 
     private void drawWithPencil() {
@@ -189,26 +231,33 @@ public class JPaintFrame extends JFrame {
         revalidate();
     }
 
-    // check if canvas is null
-    private void clearImage() {
-        if (imageTitle != "JPaint") {
-            int clearCanvasConfirmation = JOptionPane.showConfirmDialog(null, "Are you sure you want to close it?", "You seem to have an open canvas.", JOptionPane.YES_NO_OPTION);
-            if (clearCanvasConfirmation == JOptionPane.YES_OPTION) {
-                this.getContentPane().remove(canvas);
-                canvas = null;
-                imageTitle = "JPaint";
-                frameHeader.setText(imageTitle);
-                repaint();
-            }
-        }
-    }
-
     // ACTION LISTENERS
     private void hookActionListeners() {
         createCanvas = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 createDrawableCanvas();
+            }
+        };
+
+        clearCanvas = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                clearCanvas();
+            }
+        };
+
+        saveImage = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                // TODO
+            }
+        };
+
+        closeImage = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                closeCanvas();
             }
         };
 
@@ -221,13 +270,6 @@ public class JPaintFrame extends JFrame {
             }
         };
 
-        clearCanvas = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ae) {
-                canvas.removeAll();
-            }
-        };
-
         pencilAction = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
@@ -235,12 +277,6 @@ public class JPaintFrame extends JFrame {
             }
         };
 
-        closeImage = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ae) {
-                clearImage();
-            }
-        };
     }
 
 }
