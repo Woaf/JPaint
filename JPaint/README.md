@@ -1,8 +1,7 @@
 # JPaint
 Logo:
-```
+
 ![JPaint logo](logo.jpg "JPaint")
-```
 
 ## Project by: 
 - Tünde Keller
