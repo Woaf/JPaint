@@ -140,14 +140,18 @@ public class JPaintFrame extends JFrame {
 
     private void setColorButtons() {
         JPanel colorsPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-
-        JButton redButton = new JButton(" ");
+        Dimension colorButtonDimension = new Dimension(20, 20);
+        JButton redButton = new JButton();
+        redButton.setPreferredSize(colorButtonDimension);
         redButton.setBackground(Color.RED);
-        JButton blueButton = new JButton(" ");
+        JButton blueButton = new JButton();
+        blueButton.setPreferredSize(colorButtonDimension);
         blueButton.setBackground(Color.BLUE);
-        JButton yellowButton = new JButton(" ");
+        JButton yellowButton = new JButton();
+        yellowButton.setPreferredSize(colorButtonDimension);
         yellowButton.setBackground(Color.yellow);
-        JButton greenButton = new JButton(" ");
+        JButton greenButton = new JButton();
+        greenButton.setPreferredSize(colorButtonDimension);
         greenButton.setBackground(Color.GREEN);
 
         colorsPanel.add(redButton);
@@ -165,7 +169,7 @@ public class JPaintFrame extends JFrame {
         canvas = new JPanel(new FlowLayout(FlowLayout.CENTER));
         canvas.setSize(200, 200);
         canvas.setBackground(Color.WHITE);
-        
+
         add(canvas, FlowLayout.CENTER);
         revalidate();
     }
@@ -187,14 +191,14 @@ public class JPaintFrame extends JFrame {
 
     // check if canvas is null
     private void clearImage() {
-        if(imageTitle != "JPaint") {
+        if (imageTitle != "JPaint") {
             int clearCanvasConfirmation = JOptionPane.showConfirmDialog(null, "Are you sure you want to close it?", "You seem to have an open canvas.", JOptionPane.YES_NO_OPTION);
-            if(clearCanvasConfirmation == JOptionPane.YES_OPTION){
+            if (clearCanvasConfirmation == JOptionPane.YES_OPTION) {
                 this.getContentPane().remove(canvas);
-        canvas = null;
-        imageTitle = "JPaint";
-        frameHeader.setText(imageTitle);
-        repaint();
+                canvas = null;
+                imageTitle = "JPaint";
+                frameHeader.setText(imageTitle);
+                repaint();
             }
         }
     }
