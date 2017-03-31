@@ -69,3 +69,8 @@ public void sample() {
 Class naming follows the CapitalCamelCase convention. 
 When defining a class, all public then private data members should come first. 
 They are followed by the public then the private functions.
+
+
+## String checks: 
+When checking if a String is equal to another String or constant, ALWAYS USE the
+default (string1).`equals(string2)` function!
