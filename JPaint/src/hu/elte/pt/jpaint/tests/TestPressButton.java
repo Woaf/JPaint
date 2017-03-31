@@ -1,4 +1,4 @@
-package hu.elte.pu.jpaint.tests;
+package hu.elte.pt.jpaint.tests;
 
 public class TestPressButton {
     

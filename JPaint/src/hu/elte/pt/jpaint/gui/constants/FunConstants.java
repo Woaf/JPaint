@@ -1,4 +1,4 @@
-package hu.elte.pu.jpaint.gui.constants;
+package hu.elte.pt.jpaint.gui.constants;
 
 import java.io.*;
 import java.util.ArrayList;

@@ -4,7 +4,7 @@
  * This class consists of constants for the components of the JPaint window, 
  * such as its width and height, and button texts. 
  */
-package hu.elte.pu.jpaint.gui.constants;
+package hu.elte.pt.jpaint.gui.constants;
 
 import java.awt.*;
 

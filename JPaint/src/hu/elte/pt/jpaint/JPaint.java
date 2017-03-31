@@ -1,6 +1,6 @@
-package hu.elte.pu.jpaint;
+package hu.elte.pt.jpaint;
 
-import hu.elte.pu.jpaint.gui.JPaintFrame;
+import hu.elte.pt.jpaint.gui.JPaintFrame;
 
 public class JPaint {
 

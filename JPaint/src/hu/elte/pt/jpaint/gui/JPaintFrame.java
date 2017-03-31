@@ -1,7 +1,7 @@
-package hu.elte.pu.jpaint.gui;
+package hu.elte.pt.jpaint.gui;
 
-import hu.elte.pu.jpaint.gui.constants.FunConstants;
-import static hu.elte.pu.jpaint.gui.constants.WindowConstants.*;
+import hu.elte.pt.jpaint.gui.constants.FunConstants;
+import static hu.elte.pt.jpaint.gui.constants.WindowConstants.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
