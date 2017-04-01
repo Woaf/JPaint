@@ -2,6 +2,7 @@ package hu.elte.pt.jpaint.gui;
 
 import hu.elte.pt.jpaint.gui.constants.FunConstants;
 import static hu.elte.pt.jpaint.gui.constants.WindowConstants.*;
+import hu.elte.pt.jpaint.logic.canvas.CanvasPanel;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
@@ -185,10 +186,12 @@ public class JPaintFrame extends JFrame {
             JOptionPane.showMessageDialog(this, "Please enter a valid name");
             createDrawableCanvas();
         }
+        
         frameHeader.setText(imageTitle);
-        canvas = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        canvas.setSize(200, 200);
-        canvas.setBackground(Color.WHITE);
+        canvas = new CanvasPanel();
+        //canvas = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        //canvas.setSize(200, 200);
+        //canvas.setBackground(Color.WHITE);
 
         add(canvas, FlowLayout.CENTER);
         revalidate();
