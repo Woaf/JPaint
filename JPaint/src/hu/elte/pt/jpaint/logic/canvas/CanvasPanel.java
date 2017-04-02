@@ -14,12 +14,14 @@ import java.util.ArrayList;
  */
 public class CanvasPanel extends JPanel implements MouseMotionListener, MouseListener {
     private ArrayList canvasElements;
+    private static Point prevPos;
         
     public CanvasPanel() {
         this.addMouseListener(this);
         this.addMouseMotionListener(this);
         
         canvasElements = new ArrayList();
+        prevPos = new Point(0,0);
         this.setLayout(new FlowLayout(FlowLayout.CENTER));
         this.setSize(200, 200);
         this.setBackground(Color.WHITE);
@@ -73,7 +75,10 @@ public class CanvasPanel extends JPanel implements MouseMotionListener, MouseLis
 
     @Override
     public void mouseDragged(MouseEvent e) {
-        draw();
+         if(getMousePosition() != null){
+            prevPos.setLocation(getMousePosition());
+            draw();
+        }
     }
 
     @Override
