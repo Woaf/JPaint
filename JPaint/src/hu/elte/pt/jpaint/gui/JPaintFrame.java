@@ -233,6 +233,24 @@ public class JPaintFrame extends JFrame {
         }
         revalidate();
     }
+    
+    private void saveImage(){
+        if(canvas != null){
+            
+            BufferedImage imageToSave = new BufferedImage(canvas.getWidth(), canvas.getHeight(), BufferedImage.TYPE_INT_RGB);
+            Graphics2D tempGraphics = imageToSave.createGraphics();
+            canvas.paintAll(tempGraphics);
+            
+            try{
+                ImageIO.write(imageToSave, "PNG", new File("./savedimages/" + imageTitle + ".png"));
+                System.out.println("Save complete!");
+            } catch(IOException ioe){
+                System.err.println("Error occurred during saving the Image!");
+                ioe.printStackTrace();
+            }
+            
+        }
+    }
 
     // ACTION LISTENERS
     private void hookActionListeners() {
@@ -253,7 +271,7 @@ public class JPaintFrame extends JFrame {
         saveImage = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                // TODO
+                saveImage();
             }
         };
 
