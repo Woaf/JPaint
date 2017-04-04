@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.filechooser.*;
 
 /**
  * This "JPaintFrame" class defines the main outline of the JPaint application,
@@ -241,14 +242,20 @@ public class JPaintFrame extends JFrame {
             Graphics2D tempGraphics = imageToSave.createGraphics();
             canvas.paintAll(tempGraphics);
             
-            try{
-                ImageIO.write(imageToSave, "PNG", new File("./savedimages/" + imageTitle + ".png"));
-                System.out.println("Save complete!");
-            } catch(IOException ioe){
-                System.err.println("Error occurred during saving the Image!");
-                ioe.printStackTrace();
+            JFileChooser chooser = new JFileChooser();
+            FileNameExtensionFilter filter = new FileNameExtensionFilter(
+                "PNG Images", "png");
+            chooser.setFileFilter(filter);
+            int returnVal = chooser.showSaveDialog(null);
+            if(returnVal == JFileChooser.APPROVE_OPTION) {
+               try{
+                    ImageIO.write(imageToSave, "PNG", new File(chooser.getSelectedFile() + ".png"));
+                    System.out.println("Save complete! " + chooser.getSelectedFile() + ".png");
+                } catch(IOException ioe){
+                    System.err.println("Error occurred during saving the Image!");
+                    ioe.printStackTrace();
+                }
             }
-            
         }
     }
 
