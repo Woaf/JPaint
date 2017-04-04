@@ -1,5 +1,6 @@
 package hu.elte.pt.jpaint.gui;
 
+import hu.elte.pt.jpaint.GlobalConstants;
 import hu.elte.pt.jpaint.gui.constants.FunConstants;
 import static hu.elte.pt.jpaint.gui.constants.WindowConstants.*;
 import hu.elte.pt.jpaint.logic.canvas.CanvasPanel;
@@ -25,7 +26,7 @@ public class JPaintFrame extends JFrame {
      *
      */
     private String imageTitle = "JPaint";
-    private JPanel canvas = null;
+    private CanvasPanel canvas = null;
     private JLabel frameHeader = new JLabel();
 
     private ActionListener createCanvas;
@@ -40,6 +41,7 @@ public class JPaintFrame extends JFrame {
     private ActionListener bucketAction;
     private ActionListener rectangleAction;
     private ActionListener circleAction;
+    private ActionListener lineAction;
 
     /**
      * The constructor of this class sets up the window of the JPaint
@@ -129,21 +131,31 @@ public class JPaintFrame extends JFrame {
         pencilUtilityButton.setFont(JPAINT_UTILITY_FONT);
         pencilUtilityButton.setBackground(UTILITY_BUTTON_COLOR);
         pencilUtilityButton.addActionListener(pencilAction);
+        
         JButton brushUtilityButton = new JButton(BRUSH_UTILITY_TEXT);
         brushUtilityButton.setFont(JPAINT_UTILITY_FONT);
         brushUtilityButton.setBackground(UTILITY_BUTTON_COLOR);
+        
         JButton eraserUtilityButton = new JButton(ERASER_UTILITY_TEXT);
         eraserUtilityButton.setFont(JPAINT_UTILITY_FONT);
         eraserUtilityButton.setBackground(UTILITY_BUTTON_COLOR);
+        
         JButton paintBucketButton = new JButton(BUCKET_UTILITY_TEXT);
         paintBucketButton.setFont(JPAINT_UTILITY_FONT);
         paintBucketButton.setBackground(UTILITY_BUTTON_COLOR);
+        
         JButton rectangleUtilityTool = new JButton(RECTANGLE_UTILITY_TEXT);
         rectangleUtilityTool.setFont(JPAINT_UTILITY_FONT);
         rectangleUtilityTool.setBackground(UTILITY_BUTTON_COLOR);
+        
         JButton circleUtilityButton = new JButton(CIRCLE_UTILITY_TEXT);
         circleUtilityButton.setFont(JPAINT_UTILITY_FONT);
         circleUtilityButton.setBackground(UTILITY_BUTTON_COLOR);
+        
+        JButton lineUtilityButton = new JButton(LINE_UTILITY_TEXT);
+        lineUtilityButton.setFont(JPAINT_UTILITY_FONT);
+        lineUtilityButton.setBackground(UTILITY_BUTTON_COLOR);
+        lineUtilityButton.addActionListener(lineAction);
 
         utilityButtonHolder.add(pencilUtilityButton);
         utilityButtonHolder.add(brushUtilityButton);
@@ -151,6 +163,7 @@ public class JPaintFrame extends JFrame {
         utilityButtonHolder.add(paintBucketButton);
         utilityButtonHolder.add(rectangleUtilityTool);
         utilityButtonHolder.add(circleUtilityButton);
+        utilityButtonHolder.add(lineUtilityButton);
 
         utilitiesPanel.add(utilityButtonHolder);
         add(utilitiesPanel, BorderLayout.WEST);
@@ -190,9 +203,6 @@ public class JPaintFrame extends JFrame {
         
         frameHeader.setText(imageTitle);
         canvas = new CanvasPanel();
-        //canvas = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        //canvas.setSize(200, 200);
-        //canvas.setBackground(Color.WHITE);
 
         add(canvas, FlowLayout.CENTER);
         revalidate();
@@ -302,6 +312,13 @@ public class JPaintFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 drawWithPencil();
+            }
+        };
+        
+        lineAction = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                canvas.setSelectedTool(GlobalConstants.PaintTool.LINE);
             }
         };
 

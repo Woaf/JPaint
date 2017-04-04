@@ -1,5 +1,6 @@
 package hu.elte.pt.jpaint.logic.canvas;
 
+import hu.elte.pt.jpaint.GlobalConstants.PaintTool;
 import hu.elte.pt.jpaint.logic.drawable.Drawable;
 import hu.elte.pt.jpaint.logic.drawable.shape.*;
 import javax.swing.*;
@@ -14,6 +15,7 @@ import java.util.ArrayList;
  */
 public class CanvasPanel extends JPanel implements MouseMotionListener, MouseListener {
     private ArrayList canvasElements;
+    private PaintTool selectedTool;
         
     public CanvasPanel() {
         this.addMouseListener(this);
@@ -26,14 +28,19 @@ public class CanvasPanel extends JPanel implements MouseMotionListener, MouseLis
     }
     
     public void beginDrawing() {
-        if(true) {
-            Line drawnObject = new Line(getMousePosition(), getMousePosition());
-            canvasElements.add(drawnObject);
+        Drawable drawnObject;
+        switch (this.selectedTool) {
+            case LINE:
+               drawnObject = new Line(getMousePosition(), getMousePosition());
+                break;
+            default:
+                drawnObject = null; 
         }
+        canvasElements.add(drawnObject);
     }
     
     public void draw() {
-        if(true) {
+        if(this.selectedTool != null) {
             Drawable currentObject = ((Drawable)(canvasElements.get(canvasElements.size()-1)));
             ((PaintShape)currentObject).setCurrentPoint(getMousePosition());            
             repaint();
@@ -50,13 +57,21 @@ public class CanvasPanel extends JPanel implements MouseMotionListener, MouseLis
         }
     }
     
+    //Getters and Setters
+    public void setSelectedTool(PaintTool selectedTool) {
+        this.selectedTool = selectedTool;
+    }
+    
+    
+    //Mouse events
     @Override
     public void mouseClicked(MouseEvent e) {
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
-        beginDrawing();
+        if(this.selectedTool != null)
+            beginDrawing();
     }
 
     @Override
@@ -73,7 +88,7 @@ public class CanvasPanel extends JPanel implements MouseMotionListener, MouseLis
 
     @Override
     public void mouseDragged(MouseEvent e) {
-        if(getMousePosition() != null){
+        if(getMousePosition() != null && this.selectedTool != null){
             draw();
         }
     }
