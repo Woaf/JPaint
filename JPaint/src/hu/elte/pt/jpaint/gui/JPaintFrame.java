@@ -35,6 +35,14 @@ public class JPaintFrame extends JFrame {
     private JMenuItem clearCanvasMenuItem = new JMenuItem(CLEAR_CANVAS);
     private JMenuItem saveImageMenuItem = new JMenuItem(SAVE_IMAGE);
     private JMenuItem closeImageMenuItem = new JMenuItem(CLOSE_IMAGE);
+    
+    private JButton pencilUtilityButton = new JButton(PENCIL_UTILITY_TEXT);
+    private JButton brushUtilityButton = new JButton(BRUSH_UTILITY_TEXT);
+    private JButton eraserUtilityButton = new JButton(ERASER_UTILITY_TEXT);
+    private JButton paintBucketUtilityButton = new JButton(BUCKET_UTILITY_TEXT);
+    private JButton rectangleUtilityButton = new JButton(RECTANGLE_UTILITY_TEXT);
+    private JButton circleUtilityButton = new JButton(CIRCLE_UTILITY_TEXT);
+    private JButton lineUtilityButton = new JButton(LINE_UTILITY_TEXT);
 
     private ActionListener createCanvas;
     private ActionListener clearCanvas;
@@ -80,32 +88,32 @@ public class JPaintFrame extends JFrame {
         JMenuBar menuBar = new JMenuBar();
         JMenu jpaintMenu = new JMenu(MENU_TEXT);
         jpaintMenu.setFont(JPAINT_MENU_FONT);
-        JMenuItem newCanvas = new JMenuItem(NEW_CANVAS);
-        
-        JMenuItem closeApp = new JMenuItem(CLOSE_APP);
+        JMenuItem newCanvasMenuItem = new JMenuItem(NEW_CANVAS);
+        JMenuItem closeAppMenuItem = new JMenuItem(CLOSE_APP);
 
-        newCanvas.setFont(JPAINT_SUBMENU_FONT);
+        newCanvasMenuItem.setFont(JPAINT_SUBMENU_FONT);
         clearCanvasMenuItem.setFont(JPAINT_SUBMENU_FONT);
         saveImageMenuItem.setFont(JPAINT_SUBMENU_FONT);
         closeImageMenuItem.setFont(JPAINT_SUBMENU_FONT);
-        closeApp.setFont(JPAINT_SUBMENU_FONT);
+        closeAppMenuItem.setFont(JPAINT_SUBMENU_FONT);
 
-        newCanvas.addActionListener(createCanvas);
+        newCanvasMenuItem.addActionListener(createCanvas);
         clearCanvasMenuItem.addActionListener(this.clearCanvas);
         saveImageMenuItem.addActionListener(this.saveImage);
         closeImageMenuItem.addActionListener(this.closeImage);
-        closeApp.addActionListener(closeWindow);
+        closeAppMenuItem.addActionListener(closeWindow);
         
+        // disabling these buttons by default
         clearCanvasMenuItem.setEnabled(false);
         saveImageMenuItem.setEnabled(false);
         closeImageMenuItem.setEnabled(false);
-
-        jpaintMenu.add(newCanvas);
+        
+        jpaintMenu.add(newCanvasMenuItem);
         jpaintMenu.add(clearCanvasMenuItem);
         jpaintMenu.add(saveImageMenuItem);
         jpaintMenu.add(closeImageMenuItem);
         jpaintMenu.addSeparator();
-        jpaintMenu.add(closeApp);
+        jpaintMenu.add(closeAppMenuItem);
 
         menuBar.add(jpaintMenu);
         setJMenuBar(menuBar);
@@ -135,42 +143,44 @@ public class JPaintFrame extends JFrame {
         JPanel utilitiesPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         JPanel utilityButtonHolder = new JPanel(new GridLayout(0, 1, 5, 5));
         utilitiesPanel.setSize(new Dimension(100, getHeight()));
-
-        JButton pencilUtilityButton = new JButton(PENCIL_UTILITY_TEXT);
+        
         pencilUtilityButton.setFont(JPAINT_UTILITY_FONT);
         pencilUtilityButton.setBackground(UTILITY_BUTTON_COLOR);
         pencilUtilityButton.addActionListener(pencilAction);
         
-        JButton brushUtilityButton = new JButton(BRUSH_UTILITY_TEXT);
         brushUtilityButton.setFont(JPAINT_UTILITY_FONT);
         brushUtilityButton.setBackground(UTILITY_BUTTON_COLOR);
         
-        JButton eraserUtilityButton = new JButton(ERASER_UTILITY_TEXT);
         eraserUtilityButton.setFont(JPAINT_UTILITY_FONT);
         eraserUtilityButton.setBackground(UTILITY_BUTTON_COLOR);
         
-        JButton paintBucketButton = new JButton(BUCKET_UTILITY_TEXT);
-        paintBucketButton.setFont(JPAINT_UTILITY_FONT);
-        paintBucketButton.setBackground(UTILITY_BUTTON_COLOR);
+        paintBucketUtilityButton.setFont(JPAINT_UTILITY_FONT);
+        paintBucketUtilityButton.setBackground(UTILITY_BUTTON_COLOR);
         
-        JButton rectangleUtilityTool = new JButton(RECTANGLE_UTILITY_TEXT);
-        rectangleUtilityTool.setFont(JPAINT_UTILITY_FONT);
-        rectangleUtilityTool.setBackground(UTILITY_BUTTON_COLOR);
+        rectangleUtilityButton.setFont(JPAINT_UTILITY_FONT);
+        rectangleUtilityButton.setBackground(UTILITY_BUTTON_COLOR);
         
-        JButton circleUtilityButton = new JButton(CIRCLE_UTILITY_TEXT);
         circleUtilityButton.setFont(JPAINT_UTILITY_FONT);
         circleUtilityButton.setBackground(UTILITY_BUTTON_COLOR);
         
-        JButton lineUtilityButton = new JButton(LINE_UTILITY_TEXT);
         lineUtilityButton.setFont(JPAINT_UTILITY_FONT);
         lineUtilityButton.setBackground(UTILITY_BUTTON_COLOR);
         lineUtilityButton.addActionListener(lineAction);
 
+        //disabling these buttons by default
+        pencilUtilityButton.setEnabled(false);
+        brushUtilityButton.setEnabled(false);
+        eraserUtilityButton.setEnabled(false);
+        paintBucketUtilityButton.setEnabled(false);
+        rectangleUtilityButton.setEnabled(false);
+        circleUtilityButton.setEnabled(false);
+        lineUtilityButton.setEnabled(false);
+        
         utilityButtonHolder.add(pencilUtilityButton);
         utilityButtonHolder.add(brushUtilityButton);
         utilityButtonHolder.add(eraserUtilityButton);
-        utilityButtonHolder.add(paintBucketButton);
-        utilityButtonHolder.add(rectangleUtilityTool);
+        utilityButtonHolder.add(paintBucketUtilityButton);
+        utilityButtonHolder.add(rectangleUtilityButton);
         utilityButtonHolder.add(circleUtilityButton);
         utilityButtonHolder.add(lineUtilityButton);
 
@@ -213,9 +223,18 @@ public class JPaintFrame extends JFrame {
         frameHeader.setText(imageTitle);
         canvas = new CanvasPanel();
         
+        // enabling disabled buttons
         clearCanvasMenuItem.setEnabled(true);
         saveImageMenuItem.setEnabled(true);
         closeImageMenuItem.setEnabled(true);
+        
+        pencilUtilityButton.setEnabled(true);
+        brushUtilityButton.setEnabled(true);
+        eraserUtilityButton.setEnabled(true);
+        paintBucketUtilityButton.setEnabled(true);
+        rectangleUtilityButton.setEnabled(true);
+        circleUtilityButton.setEnabled(true);
+        lineUtilityButton.setEnabled(true);
 
         add(canvas, FlowLayout.CENTER);
         revalidate();
@@ -237,9 +256,19 @@ public class JPaintFrame extends JFrame {
                     canvas = null;
                     imageTitle = "JPaint";
                     frameHeader.setText(imageTitle);
+                    // disabling enabled buttons
                     clearCanvasMenuItem.setEnabled(false);
                     saveImageMenuItem.setEnabled(false);
                     closeImageMenuItem.setEnabled(false);
+                    
+                    pencilUtilityButton.setEnabled(false);
+                    brushUtilityButton.setEnabled(false);
+                    eraserUtilityButton.setEnabled(false);
+                    paintBucketUtilityButton.setEnabled(false);
+                    rectangleUtilityButton.setEnabled(false);
+                    circleUtilityButton.setEnabled(false);
+                    lineUtilityButton.setEnabled(false);
+                    
                     repaint();
                 }
             }
