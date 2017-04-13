@@ -1,7 +1,6 @@
 package hu.elte.pt.jpaint.gui;
 
 import hu.elte.pt.jpaint.GlobalConstants;
-import hu.elte.pt.jpaint.gui.constants.FunConstants;
 import static hu.elte.pt.jpaint.gui.constants.WindowConstants.*;
 import hu.elte.pt.jpaint.logic.canvas.CanvasPanel;
 import java.awt.*;
@@ -28,6 +27,14 @@ public class JPaintFrame extends JFrame {
     private String imageTitle = "JPaint";
     private CanvasPanel canvas = null;
     private JLabel frameHeader = new JLabel();
+    
+    /*
+    * These menu items had to be moved outside of the setup function in 
+    * order to manually set their visibility (enabled/disabled property).
+    */
+    private JMenuItem clearCanvasMenuItem = new JMenuItem(CLEAR_CANVAS);
+    private JMenuItem saveImageMenuItem = new JMenuItem(SAVE_IMAGE);
+    private JMenuItem closeImageMenuItem = new JMenuItem(CLOSE_IMAGE);
 
     private ActionListener createCanvas;
     private ActionListener clearCanvas;
@@ -74,27 +81,29 @@ public class JPaintFrame extends JFrame {
         JMenu jpaintMenu = new JMenu(MENU_TEXT);
         jpaintMenu.setFont(JPAINT_MENU_FONT);
         JMenuItem newCanvas = new JMenuItem(NEW_CANVAS);
-        JMenuItem clearCanvas = new JMenuItem(CLEAR_CANVAS);
-        JMenuItem saveImage = new JMenuItem(SAVE_IMAGE);
-        JMenuItem closeImage = new JMenuItem(CLOSE_IMAGE);
+        
         JMenuItem closeApp = new JMenuItem(CLOSE_APP);
 
         newCanvas.setFont(JPAINT_SUBMENU_FONT);
-        clearCanvas.setFont(JPAINT_SUBMENU_FONT);
-        saveImage.setFont(JPAINT_SUBMENU_FONT);
-        closeImage.setFont(JPAINT_SUBMENU_FONT);
+        clearCanvasMenuItem.setFont(JPAINT_SUBMENU_FONT);
+        saveImageMenuItem.setFont(JPAINT_SUBMENU_FONT);
+        closeImageMenuItem.setFont(JPAINT_SUBMENU_FONT);
         closeApp.setFont(JPAINT_SUBMENU_FONT);
 
         newCanvas.addActionListener(createCanvas);
-        clearCanvas.addActionListener(this.clearCanvas);
-        saveImage.addActionListener(this.saveImage);
-        closeImage.addActionListener(this.closeImage);
+        clearCanvasMenuItem.addActionListener(this.clearCanvas);
+        saveImageMenuItem.addActionListener(this.saveImage);
+        closeImageMenuItem.addActionListener(this.closeImage);
         closeApp.addActionListener(closeWindow);
+        
+        clearCanvasMenuItem.setEnabled(false);
+        saveImageMenuItem.setEnabled(false);
+        closeImageMenuItem.setEnabled(false);
 
         jpaintMenu.add(newCanvas);
-        jpaintMenu.add(clearCanvas);
-        jpaintMenu.add(saveImage);
-        jpaintMenu.add(closeImage);
+        jpaintMenu.add(clearCanvasMenuItem);
+        jpaintMenu.add(saveImageMenuItem);
+        jpaintMenu.add(closeImageMenuItem);
         jpaintMenu.addSeparator();
         jpaintMenu.add(closeApp);
 
@@ -203,6 +212,10 @@ public class JPaintFrame extends JFrame {
         
         frameHeader.setText(imageTitle);
         canvas = new CanvasPanel();
+        
+        clearCanvasMenuItem.setEnabled(true);
+        saveImageMenuItem.setEnabled(true);
+        closeImageMenuItem.setEnabled(true);
 
         add(canvas, FlowLayout.CENTER);
         revalidate();
@@ -224,6 +237,9 @@ public class JPaintFrame extends JFrame {
                     canvas = null;
                     imageTitle = "JPaint";
                     frameHeader.setText(imageTitle);
+                    clearCanvasMenuItem.setEnabled(false);
+                    saveImageMenuItem.setEnabled(false);
+                    closeImageMenuItem.setEnabled(false);
                     repaint();
                 }
             }
