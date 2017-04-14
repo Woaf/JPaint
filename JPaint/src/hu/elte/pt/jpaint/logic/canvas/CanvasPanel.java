@@ -33,6 +33,9 @@ public class CanvasPanel extends JPanel implements MouseMotionListener, MouseLis
             case LINE:
                drawnObject = new Line(getMousePosition(), getMousePosition());
                 break;
+            case CIRCLE: 
+                drawnObject = new Circle(getMousePosition(), getMousePosition());
+                break;
             default:
                 drawnObject = null; 
         }

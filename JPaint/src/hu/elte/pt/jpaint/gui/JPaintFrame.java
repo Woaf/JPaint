@@ -162,6 +162,7 @@ public class JPaintFrame extends JFrame {
         
         circleUtilityButton.setFont(JPAINT_UTILITY_FONT);
         circleUtilityButton.setBackground(UTILITY_BUTTON_COLOR);
+        circleUtilityButton.addActionListener(circleAction);
         
         lineUtilityButton.setFont(JPAINT_UTILITY_FONT);
         lineUtilityButton.setBackground(UTILITY_BUTTON_COLOR);
@@ -357,6 +358,14 @@ public class JPaintFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 drawWithPencil();
+            }
+        };
+        
+        circleAction = new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                canvas.setSelectedTool(GlobalConstants.PaintTool.CIRCLE);
             }
         };
         
