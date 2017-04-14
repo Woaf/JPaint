@@ -34,7 +34,9 @@ public class Circle extends PaintShape {
          * - width of the circle
          * 
          * If the starting point sets below, or right of the ending points, 
-         * then the start and the endpoints should be switched. 
+         * then the start and the endpoints should be switched; the 
+         * absolute value of the dimensions (height and width) should be 
+         * calculated in order to avoid negative dimensional values.
          */
         
         g2d.drawOval((startingPoint.x > currentPoint.x ? currentPoint.x : startingPoint.x),
