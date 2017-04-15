@@ -4,7 +4,7 @@ import java.awt.*;
 
 /**
  *
- * @author Bálint
+ * @author Bálint Fazekas
  */
 public class Rectangle extends PaintShape {
     public Rectangle(Point startingPoint, Point currentPoint) {
