@@ -95,6 +95,6 @@ This can be easily fixed by the following method:
 * The _Author_ and _Committer_ should now include your GitHub user account. 
 * Set the _Author_ and _Committer_ to your GitHub user.
 
-![GitHub Committer](commit.jpg?raw=true"Committer")
+![GitHub Committer](commit.jpg?raw=true "Committer")
 
 * Finalize your commit.
