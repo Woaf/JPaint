@@ -74,3 +74,25 @@ They are followed by the public then the private functions.
 ## String checks: 
 When checking if a String is equal to another String or constant, ALWAYS USE the
 default (string1).`equals(string2)` function!
+
+## gitconfig setup (for developers)
+When installing Git on your system, it sometimes does not create a Global git configuration file
+that would be consistent with your GitHub account. In other words, even if you might use your GitHub 
+account login information to commit and push your changes, it might do it in the name of your local alias. 
+This can be easily fixed by the following method: 
+
+* Start up your NetBeans IDE, and open a project you already cloned or initialized with GitHub. 
+* Go to _Team -> Repository -> Open Configuration_
+** Note: if you do not have this option in the _Team_ menu, then open any sourcefile from the project, or create one. 
+* This will open your local .config file. Add the following lines to the .config file: 
+`
+[user]
+        name = *your GitHub user name*
+        email = *your GitHub email*
+`
+* Save the file.
+* Go to _Team -> Commit..._ and make a Commit.
+* The _Author_ and _Committer_ should now include your GitHub user account. 
+* Set the _Author_ and _Committer_ to your GitHub user.
+![GitHub Committer](commit.JPG "GitHub Committer")
+* Finalize your commit.
