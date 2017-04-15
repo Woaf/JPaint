@@ -8,6 +8,7 @@ package hu.elte.pt.jpaint;
 public class GlobalConstants {
     public static enum PaintTool {
         PENCIL,
+        RECTANGLE,
         LINE,
         CIRCLE
     }

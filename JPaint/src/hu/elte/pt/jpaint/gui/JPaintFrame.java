@@ -159,6 +159,7 @@ public class JPaintFrame extends JFrame {
         
         rectangleUtilityButton.setFont(JPAINT_UTILITY_FONT);
         rectangleUtilityButton.setBackground(UTILITY_BUTTON_COLOR);
+        rectangleUtilityButton.addActionListener(rectangleAction);
         
         circleUtilityButton.setFont(JPAINT_UTILITY_FONT);
         circleUtilityButton.setBackground(UTILITY_BUTTON_COLOR);
@@ -360,6 +361,14 @@ public class JPaintFrame extends JFrame {
                 drawWithPencil();
             }
         };
+     
+        rectangleAction = new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                canvas.setSelectedTool(GlobalConstants.PaintTool.RECTANGLE);
+            }
+        };
         
         circleAction = new ActionListener() {
 
@@ -377,5 +386,4 @@ public class JPaintFrame extends JFrame {
         };
 
     }
-
 }

@@ -30,11 +30,14 @@ public class CanvasPanel extends JPanel implements MouseMotionListener, MouseLis
     public void beginDrawing() {
         Drawable drawnObject;
         switch (this.selectedTool) {
-            case LINE:
-               drawnObject = new Line(getMousePosition(), getMousePosition());
+            case RECTANGLE: 
+                drawnObject = new hu.elte.pt.jpaint.logic.drawable.shape.Rectangle(getMousePosition(), getMousePosition());
                 break;
             case CIRCLE: 
                 drawnObject = new Circle(getMousePosition(), getMousePosition());
+                break;
+            case LINE:
+               drawnObject = new Line(getMousePosition(), getMousePosition());
                 break;
             default:
                 drawnObject = null; 

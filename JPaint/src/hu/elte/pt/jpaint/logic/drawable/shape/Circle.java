@@ -12,8 +12,6 @@ import java.awt.*;
  * @author Bálint
  */
 public class Circle extends PaintShape {
-
-    private int shiftButtonListener;
     
     public Circle(Point startingPoint, Point currentPoint) {
         super(startingPoint, currentPoint);
