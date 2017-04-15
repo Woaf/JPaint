@@ -85,11 +85,11 @@ This can be easily fixed by the following method:
 * Go to _Team -> Repository -> Open Configuration_
     * Note: if you do not have this option in the _Team_ menu, then open any sourcefile from the project, or create one. 
 * This will open your local .config file. Add the following lines to the .config file: 
-`
+```
 [user]
         name = your GitHub user name
         email = your GitHub email
-`
+```
 * Save the file.
 * Go to _Team -> Commit..._ and make a Commit.
 * The _Author_ and _Committer_ should now include your GitHub user account. 
