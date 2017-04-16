@@ -28,15 +28,15 @@ public class JPaintFrame extends JFrame {
     private String imageTitle = "JPaint";
     private CanvasPanel canvas = null;
     private JLabel frameHeader = new JLabel();
-    
+
     /*
-    * These menu items had to be moved outside of the setup function in 
-    * order to manually set their visibility (enabled/disabled property).
-    */
+     * These menu items had to be moved outside of the setup function in 
+     * order to manually set their visibility (enabled/disabled property).
+     */
     private JMenuItem clearCanvasMenuItem = new JMenuItem(CLEAR_CANVAS);
     private JMenuItem saveImageMenuItem = new JMenuItem(SAVE_IMAGE);
     private JMenuItem closeImageMenuItem = new JMenuItem(CLOSE_IMAGE);
-    
+
     private JButton pencilUtilityButton = new JButton(PENCIL_UTILITY_TEXT);
     private JButton brushUtilityButton = new JButton(BRUSH_UTILITY_TEXT);
     private JButton eraserUtilityButton = new JButton(ERASER_UTILITY_TEXT);
@@ -120,12 +120,12 @@ public class JPaintFrame extends JFrame {
         saveImageMenuItem.addActionListener(this.saveImage);
         closeImageMenuItem.addActionListener(this.closeImage);
         closeAppMenuItem.addActionListener(closeWindow);
-        
+
         // disabling these buttons by default
         clearCanvasMenuItem.setEnabled(false);
         saveImageMenuItem.setEnabled(false);
         closeImageMenuItem.setEnabled(false);
-        
+
         jpaintMenu.add(newCanvasMenuItem);
         jpaintMenu.add(clearCanvasMenuItem);
         jpaintMenu.add(saveImageMenuItem);
@@ -161,28 +161,28 @@ public class JPaintFrame extends JFrame {
         JPanel utilitiesPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         JPanel utilityButtonHolder = new JPanel(new GridLayout(0, 1, 5, 5));
         utilitiesPanel.setSize(new Dimension(100, getHeight()));
-        
+
         pencilUtilityButton.setFont(JPAINT_UTILITY_FONT);
         pencilUtilityButton.setBackground(UTILITY_BUTTON_COLOR);
         pencilUtilityButton.addActionListener(pencilAction);
-        
+
         brushUtilityButton.setFont(JPAINT_UTILITY_FONT);
         brushUtilityButton.setBackground(UTILITY_BUTTON_COLOR);
-        
+
         eraserUtilityButton.setFont(JPAINT_UTILITY_FONT);
         eraserUtilityButton.setBackground(UTILITY_BUTTON_COLOR);
-        
+
         paintBucketUtilityButton.setFont(JPAINT_UTILITY_FONT);
         paintBucketUtilityButton.setBackground(UTILITY_BUTTON_COLOR);
-        
+
         rectangleUtilityButton.setFont(JPAINT_UTILITY_FONT);
         rectangleUtilityButton.setBackground(UTILITY_BUTTON_COLOR);
         rectangleUtilityButton.addActionListener(rectangleAction);
-        
+
         circleUtilityButton.setFont(JPAINT_UTILITY_FONT);
         circleUtilityButton.setBackground(UTILITY_BUTTON_COLOR);
         circleUtilityButton.addActionListener(circleAction);
-        
+
         lineUtilityButton.setFont(JPAINT_UTILITY_FONT);
         lineUtilityButton.setBackground(UTILITY_BUTTON_COLOR);
         lineUtilityButton.addActionListener(lineAction);
@@ -195,7 +195,7 @@ public class JPaintFrame extends JFrame {
         rectangleUtilityButton.setEnabled(false);
         circleUtilityButton.setEnabled(false);
         lineUtilityButton.setEnabled(false);
-        
+
         utilityButtonHolder.add(pencilUtilityButton);
         utilityButtonHolder.add(brushUtilityButton);
         utilityButtonHolder.add(eraserUtilityButton);
@@ -295,14 +295,26 @@ public class JPaintFrame extends JFrame {
         add(colorsPanel, BorderLayout.PAGE_END);
     }
 
+    public CanvasPanel getCanvas() {
+        return canvas;
+    }
+
     // MOVE TO LOGIC 
     private void createDrawableCanvas() {
+
+        if (getCanvas() != null) {
+            int createCanvasConfirmation = JOptionPane.showConfirmDialog(null, CLEAR_IMAGE_WINDOW_MESSAGE, CLEAR_IMAGE_WINDOW_TITLE, JOptionPane.YES_NO_OPTION);
+            if (createCanvasConfirmation == JOptionPane.YES_OPTION) {
+                this.getContentPane().remove(canvas);
+            }
+        }
+
         imageTitle = JOptionPane.showInputDialog(IMAGE_NAME_MESSAGE);
-        if(imageTitle.equals("")){
+        if (imageTitle.equals("")) {
             JOptionPane.showMessageDialog(this, "Please enter a valid name");
             createDrawableCanvas();
         }
-        
+
         frameHeader.setText(imageTitle);
         canvas = new CanvasPanel(selectedColorButton.getBackground());
         
@@ -310,7 +322,7 @@ public class JPaintFrame extends JFrame {
         clearCanvasMenuItem.setEnabled(true);
         saveImageMenuItem.setEnabled(true);
         closeImageMenuItem.setEnabled(true);
-        
+
         pencilUtilityButton.setEnabled(true);
         brushUtilityButton.setEnabled(true);
         eraserUtilityButton.setEnabled(true);
@@ -325,15 +337,21 @@ public class JPaintFrame extends JFrame {
 
     private void clearCanvas() {
         if (canvas != null) {
-            canvas.removeAll();
-            repaint();
+            int clearCanvasConfirmation = JOptionPane.showConfirmDialog(null, CLEAR_IMAGE_WINDOW_MESSAGE, CLEAR_IMAGE_WINDOW_TITLE, JOptionPane.YES_NO_OPTION);
+            if (clearCanvasConfirmation == JOptionPane.YES_OPTION) {
+                this.getContentPane().remove(canvas);
+                canvas = new CanvasPanel(selectedColorButton.getBackground());
+                add(canvas, FlowLayout.CENTER);
+                revalidate();
+                repaint();
+            }
         }
     }
 
     private void closeCanvas() {
         if (canvas != null) {
             if (imageTitle != "JPaint") {
-                int clearCanvasConfirmation = JOptionPane.showConfirmDialog(null, CLEAR_IMAGE_WINDOW_MESSAGE, CLEAR_IMAGE_WINDOW_TITLE, JOptionPane.YES_NO_OPTION);
+                int clearCanvasConfirmation = JOptionPane.showConfirmDialog(null, CLOSE_IMAGE_WINDOW_MESSAGE, CLOSE_IMAGE_WINDOW_TITLE, JOptionPane.YES_NO_OPTION);
                 if (clearCanvasConfirmation == JOptionPane.YES_OPTION) {
                     this.getContentPane().remove(canvas);
                     canvas = null;
@@ -343,7 +361,7 @@ public class JPaintFrame extends JFrame {
                     clearCanvasMenuItem.setEnabled(false);
                     saveImageMenuItem.setEnabled(false);
                     closeImageMenuItem.setEnabled(false);
-                    
+
                     pencilUtilityButton.setEnabled(false);
                     brushUtilityButton.setEnabled(false);
                     eraserUtilityButton.setEnabled(false);
@@ -351,7 +369,7 @@ public class JPaintFrame extends JFrame {
                     rectangleUtilityButton.setEnabled(false);
                     circleUtilityButton.setEnabled(false);
                     lineUtilityButton.setEnabled(false);
-                    
+
                     repaint();
                 }
             }
@@ -383,24 +401,24 @@ public class JPaintFrame extends JFrame {
         }
         revalidate();
     }
-    
-    private void saveImage(){
-        if(canvas != null){
-            
+
+    private void saveImage() {
+        if (canvas != null) {
+
             BufferedImage imageToSave = new BufferedImage(canvas.getWidth(), canvas.getHeight(), BufferedImage.TYPE_INT_RGB);
             Graphics2D tempGraphics = imageToSave.createGraphics();
             canvas.paintAll(tempGraphics);
-            
+
             JFileChooser chooser = new JFileChooser();
             FileNameExtensionFilter filter = new FileNameExtensionFilter(
-                "PNG Images", "png");
+                    "PNG Images", "png");
             chooser.setFileFilter(filter);
             int returnVal = chooser.showSaveDialog(null);
-            if(returnVal == JFileChooser.APPROVE_OPTION) {
-               try{
+            if (returnVal == JFileChooser.APPROVE_OPTION) {
+                try {
                     ImageIO.write(imageToSave, "PNG", new File(chooser.getSelectedFile() + ".png"));
                     System.out.println("Save complete! " + chooser.getSelectedFile() + ".png");
-                } catch(IOException ioe){
+                } catch (IOException ioe) {
                     System.err.println("Error occurred during saving the Image!");
                     ioe.printStackTrace();
                 }
@@ -453,7 +471,7 @@ public class JPaintFrame extends JFrame {
                 drawWithPencil();
             }
         };
-     
+
         rectangleAction = new ActionListener() {
 
             @Override
@@ -461,7 +479,7 @@ public class JPaintFrame extends JFrame {
                 canvas.setSelectedTool(GlobalConstants.PaintTool.RECTANGLE);
             }
         };
-        
+
         circleAction = new ActionListener() {
 
             @Override
@@ -469,7 +487,7 @@ public class JPaintFrame extends JFrame {
                 canvas.setSelectedTool(GlobalConstants.PaintTool.CIRCLE);
             }
         };
-        
+
         lineAction = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
@@ -492,7 +510,7 @@ public class JPaintFrame extends JFrame {
                 setSelectedColorButton(redButton);
             }
         };
-        
+
         colorBlueAction = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -500,7 +518,7 @@ public class JPaintFrame extends JFrame {
                 setSelectedColorButton(blueButton);
             }
         };
-        
+
         colorYellowAction = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -508,7 +526,7 @@ public class JPaintFrame extends JFrame {
                 setSelectedColorButton(yellowButton);
             }
         };
-        
+
         colorGreenAction = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -517,6 +535,5 @@ public class JPaintFrame extends JFrame {
             }
         };
 
-        
     }
 }

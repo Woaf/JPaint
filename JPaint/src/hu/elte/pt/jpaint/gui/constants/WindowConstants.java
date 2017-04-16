@@ -37,6 +37,8 @@ public class WindowConstants {
     
     public static final String IMAGE_NAME_MESSAGE = "Please enter a name for your image:";
     public static final String CLEAR_IMAGE_WINDOW_TITLE = "You seem to have an open canvas.";
-    public static final String CLEAR_IMAGE_WINDOW_MESSAGE = "Are you sure you want to close it?";
+    public static final String CLEAR_IMAGE_WINDOW_MESSAGE = "Are you sure you want to clear it?";
+    public static final String CLOSE_IMAGE_WINDOW_TITLE = "You seem to have an open canvas.";
+    public static final String CLOSE_IMAGE_WINDOW_MESSAGE = "Are you sure you want to close it?";
     
 }
