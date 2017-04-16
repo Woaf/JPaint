@@ -11,14 +11,14 @@ import java.util.ArrayList;
 /**
  *
  * @author Kornél Konkolics
- * @version 0.0.1
+ * @version 0.0.2
  */
 public class CanvasPanel extends JPanel implements MouseMotionListener, MouseListener {
     private ArrayList canvasElements;
     private PaintTool selectedTool;
     private Color selectedColor;
         
-    public CanvasPanel() {
+    public CanvasPanel(Color selectedColor) {
         this.addMouseListener(this);
         this.addMouseMotionListener(this);
         
@@ -26,7 +26,7 @@ public class CanvasPanel extends JPanel implements MouseMotionListener, MouseLis
         this.setLayout(new FlowLayout(FlowLayout.CENTER));
         this.setSize(200, 200);
         this.setBackground(Color.WHITE);
-        this.selectedColor = Color.BLACK;
+        this.selectedColor = selectedColor;
     }
     
     public void beginDrawing() {

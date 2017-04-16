@@ -8,6 +8,7 @@ import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import javafx.scene.control.ColorPicker;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.filechooser.*;
@@ -43,7 +44,7 @@ public class JPaintFrame extends JFrame {
     private JButton rectangleUtilityButton = new JButton(RECTANGLE_UTILITY_TEXT);
     private JButton circleUtilityButton = new JButton(CIRCLE_UTILITY_TEXT);
     private JButton lineUtilityButton = new JButton(LINE_UTILITY_TEXT);
-
+    
     private ActionListener createCanvas;
     private ActionListener clearCanvas;
     private ActionListener saveImage;
@@ -58,10 +59,21 @@ public class JPaintFrame extends JFrame {
     private ActionListener circleAction;
     private ActionListener lineAction;
     
+    private ActionListener colorBlackAction;
     private ActionListener colorRedAction;
     private ActionListener colorBlueAction;
     private ActionListener colorYellowAction;
     private ActionListener colorGreenAction;
+    
+    private JButton blackButton = new JButton();
+    private JButton redButton = new JButton();
+    private JButton blueButton = new JButton();
+    private JButton yellowButton = new JButton();
+    private JButton greenButton = new JButton();
+    private JButton wildcard1ColorButton = new JButton();
+    private JButton wildcard2ColorButton = new JButton();
+    private JButton wildcard3ColorButton = new JButton();
+    private JButton selectedColorButton; 
 
     /**
      * The constructor of this class sets up the window of the JPaint
@@ -78,6 +90,7 @@ public class JPaintFrame extends JFrame {
         setPageCenter();
         setTools();
         setColorButtons();
+        setSelectedColorButton(blackButton);
     }
 
     public void initFrame() {
@@ -193,36 +206,91 @@ public class JPaintFrame extends JFrame {
 
         utilitiesPanel.add(utilityButtonHolder);
         add(utilitiesPanel, BorderLayout.WEST);
-
     }
 
     private void setColorButtons() {
         JPanel colorsPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        JColorChooser colorChooser = new JColorChooser();
         
-        JButton redButton = new JButton();
+        blackButton.setPreferredSize(COLOR_BUTTON_DIMENSIONS);
+        blackButton.setBackground(Color.BLACK);
+        blackButton.addActionListener(colorBlackAction);
+        
         redButton.setPreferredSize(COLOR_BUTTON_DIMENSIONS);
         redButton.setBackground(Color.RED);
         redButton.addActionListener(colorRedAction);
         
-        JButton blueButton = new JButton();
         blueButton.setPreferredSize(COLOR_BUTTON_DIMENSIONS);
         blueButton.setBackground(Color.BLUE);
         blueButton.addActionListener(colorBlueAction);
         
-        JButton yellowButton = new JButton();
         yellowButton.setPreferredSize(COLOR_BUTTON_DIMENSIONS);
         yellowButton.setBackground(Color.yellow);
         yellowButton.addActionListener(colorYellowAction);
         
-        JButton greenButton = new JButton();
         greenButton.setPreferredSize(COLOR_BUTTON_DIMENSIONS);
         greenButton.setBackground(Color.GREEN);
         greenButton.addActionListener(colorGreenAction);
-
+        
+        wildcard1ColorButton.setPreferredSize(COLOR_BUTTON_DIMENSIONS);
+        wildcard2ColorButton.setPreferredSize(COLOR_BUTTON_DIMENSIONS);
+        wildcard3ColorButton.setPreferredSize(COLOR_BUTTON_DIMENSIONS);
+        wildcard1ColorButton.setBackground(Color.WHITE);
+        wildcard2ColorButton.setBackground(Color.WHITE);
+        wildcard3ColorButton.setBackground(Color.WHITE);
+        
+        /**
+         * Left and right mouse click events are required for the "wild card" colors
+         * for JColorChooser dialog to pop
+         */
+        wildcard1ColorButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                if(SwingUtilities.isRightMouseButton(e)) {
+                    wildcard1ColorButton.setBackground(
+                        colorChooser.showDialog(JPaintFrame.this, "Color picker", wildcard1ColorButton.getBackground())
+                    );
+                } else if(SwingUtilities.isLeftMouseButton(e)) {
+                    setSelectedColorButton(wildcard1ColorButton);
+                }
+            }
+        });
+        
+        wildcard2ColorButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                if(SwingUtilities.isRightMouseButton(e)) {
+                    wildcard2ColorButton.setBackground(
+                        colorChooser.showDialog(JPaintFrame.this, "Color picker", wildcard2ColorButton.getBackground())
+                    );
+                } else if(SwingUtilities.isLeftMouseButton(e)) {
+                    setSelectedColorButton(wildcard2ColorButton);
+                }
+            }
+        });
+        
+        wildcard3ColorButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                if(SwingUtilities.isRightMouseButton(e)) {
+                    wildcard3ColorButton.setBackground(
+                        colorChooser.showDialog(JPaintFrame.this, "Color picker", wildcard3ColorButton.getBackground())
+                    );
+                } else if(SwingUtilities.isLeftMouseButton(e)) {
+                    setSelectedColorButton(wildcard3ColorButton);
+                }
+            }
+        });
+        
+        colorsPanel.add(blackButton);
         colorsPanel.add(redButton);
         colorsPanel.add(blueButton);
         colorsPanel.add(yellowButton);
         colorsPanel.add(greenButton);
+        colorsPanel.add(new JSeparator(JSeparator.VERTICAL));
+        colorsPanel.add(wildcard1ColorButton);
+        colorsPanel.add(wildcard2ColorButton);
+        colorsPanel.add(wildcard3ColorButton);
 
         add(colorsPanel, BorderLayout.PAGE_END);
     }
@@ -236,7 +304,7 @@ public class JPaintFrame extends JFrame {
         }
         
         frameHeader.setText(imageTitle);
-        canvas = new CanvasPanel();
+        canvas = new CanvasPanel(selectedColorButton.getBackground());
         
         // enabling disabled buttons
         clearCanvasMenuItem.setEnabled(true);
@@ -288,6 +356,17 @@ public class JPaintFrame extends JFrame {
                 }
             }
         }
+    }
+    
+    private void setSelectedColorButton(JButton selectedColorButton) {
+        //Resets previously selected border
+        if(this.selectedColorButton != null)
+            this.selectedColorButton.setBorder(BorderFactory.createEmptyBorder());
+        //Sets a new selected color button
+        this.selectedColorButton = selectedColorButton;
+        this.selectedColorButton.setBorder(BorderFactory.createBevelBorder(1, Color.BLACK, Color.WHITE));
+        if(canvas != null)
+            canvas.setSelectedColor(this.selectedColorButton.getBackground());
     }
 
     private void drawWithPencil() {
@@ -398,31 +477,43 @@ public class JPaintFrame extends JFrame {
             }
         };
         
+        colorBlackAction = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //canvas.setSelectedColor(Color.BLACK);
+                setSelectedColorButton(blackButton);
+            }
+        };
+        
         colorRedAction = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                canvas.setSelectedColor(Color.RED);
+                //canvas.setSelectedColor(Color.RED);
+                setSelectedColorButton(redButton);
             }
         };
         
         colorBlueAction = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                canvas.setSelectedColor(Color.BLUE);
+                //canvas.setSelectedColor(Color.BLUE);
+                setSelectedColorButton(blueButton);
             }
         };
         
         colorYellowAction = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                canvas.setSelectedColor(Color.YELLOW);
+                //canvas.setSelectedColor(Color.YELLOW);
+                setSelectedColorButton(yellowButton);
             }
         };
         
         colorGreenAction = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                canvas.setSelectedColor(Color.GREEN);
+                //canvas.setSelectedColor(Color.GREEN);
+                setSelectedColorButton(greenButton);
             }
         };
 
