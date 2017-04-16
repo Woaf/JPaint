@@ -57,6 +57,11 @@ public class JPaintFrame extends JFrame {
     private ActionListener rectangleAction;
     private ActionListener circleAction;
     private ActionListener lineAction;
+    
+    private ActionListener colorRedAction;
+    private ActionListener colorBlueAction;
+    private ActionListener colorYellowAction;
+    private ActionListener colorGreenAction;
 
     /**
      * The constructor of this class sets up the window of the JPaint
@@ -193,18 +198,26 @@ public class JPaintFrame extends JFrame {
 
     private void setColorButtons() {
         JPanel colorsPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        
         JButton redButton = new JButton();
         redButton.setPreferredSize(COLOR_BUTTON_DIMENSIONS);
         redButton.setBackground(Color.RED);
+        redButton.addActionListener(colorRedAction);
+        
         JButton blueButton = new JButton();
         blueButton.setPreferredSize(COLOR_BUTTON_DIMENSIONS);
         blueButton.setBackground(Color.BLUE);
+        blueButton.addActionListener(colorBlueAction);
+        
         JButton yellowButton = new JButton();
         yellowButton.setPreferredSize(COLOR_BUTTON_DIMENSIONS);
         yellowButton.setBackground(Color.yellow);
+        yellowButton.addActionListener(colorYellowAction);
+        
         JButton greenButton = new JButton();
         greenButton.setPreferredSize(COLOR_BUTTON_DIMENSIONS);
         greenButton.setBackground(Color.GREEN);
+        greenButton.addActionListener(colorGreenAction);
 
         colorsPanel.add(redButton);
         colorsPanel.add(blueButton);
@@ -384,6 +397,35 @@ public class JPaintFrame extends JFrame {
                 canvas.setSelectedTool(GlobalConstants.PaintTool.LINE);
             }
         };
+        
+        colorRedAction = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                canvas.setSelectedColor(Color.RED);
+            }
+        };
+        
+        colorBlueAction = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                canvas.setSelectedColor(Color.BLUE);
+            }
+        };
+        
+        colorYellowAction = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                canvas.setSelectedColor(Color.YELLOW);
+            }
+        };
+        
+        colorGreenAction = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                canvas.setSelectedColor(Color.GREEN);
+            }
+        };
 
+        
     }
 }

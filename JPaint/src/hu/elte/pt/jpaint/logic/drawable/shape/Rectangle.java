@@ -7,8 +7,8 @@ import java.awt.*;
  * @author Bálint Fazekas
  */
 public class Rectangle extends PaintShape {
-    public Rectangle(Point startingPoint, Point currentPoint) {
-        super(startingPoint, currentPoint);
+    public Rectangle(Point startingPoint, Point currentPoint, Color selectedColor) {
+        super(startingPoint, currentPoint, selectedColor);
     }
 
     /**
@@ -28,7 +28,7 @@ public class Rectangle extends PaintShape {
     @Override
     public void draw(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
-        g2d.setPaint(Color.BLACK);
+        g2d.setPaint(selectedColor);
         //Anti-aliasing to remove jagged edges from the line
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         

@@ -13,14 +13,14 @@ import java.awt.*;
  */
 public class Circle extends PaintShape {
     
-    public Circle(Point startingPoint, Point currentPoint) {
-        super(startingPoint, currentPoint);
+    public Circle(Point startingPoint, Point currentPoint, Color selectedColor) {
+        super(startingPoint, currentPoint, selectedColor);
     }
 
     @Override
     public void draw(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
-        g2d.setPaint(Color.BLACK);
+        g2d.setPaint(selectedColor);
         //Anti-aliasing to remove jagged edges from the line
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 

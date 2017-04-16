@@ -16,6 +16,7 @@ import java.util.ArrayList;
 public class CanvasPanel extends JPanel implements MouseMotionListener, MouseListener {
     private ArrayList canvasElements;
     private PaintTool selectedTool;
+    private Color selectedColor;
         
     public CanvasPanel() {
         this.addMouseListener(this);
@@ -25,19 +26,20 @@ public class CanvasPanel extends JPanel implements MouseMotionListener, MouseLis
         this.setLayout(new FlowLayout(FlowLayout.CENTER));
         this.setSize(200, 200);
         this.setBackground(Color.WHITE);
+        this.selectedColor = Color.BLACK;
     }
     
     public void beginDrawing() {
         Drawable drawnObject;
         switch (this.selectedTool) {
             case RECTANGLE: 
-                drawnObject = new hu.elte.pt.jpaint.logic.drawable.shape.Rectangle(getMousePosition(), getMousePosition());
+                drawnObject = new hu.elte.pt.jpaint.logic.drawable.shape.Rectangle(getMousePosition(), getMousePosition(), selectedColor);
                 break;
             case CIRCLE: 
-                drawnObject = new Circle(getMousePosition(), getMousePosition());
+                drawnObject = new Circle(getMousePosition(), getMousePosition(),  selectedColor);
                 break;
             case LINE:
-               drawnObject = new Line(getMousePosition(), getMousePosition());
+               drawnObject = new Line(getMousePosition(), getMousePosition(), selectedColor);
                 break;
             default:
                 drawnObject = null; 
@@ -66,6 +68,10 @@ public class CanvasPanel extends JPanel implements MouseMotionListener, MouseLis
     //Setters and getters
     public void setSelectedTool(PaintTool selectedTool) {
         this.selectedTool = selectedTool;
+    }
+    
+    public void setSelectedColor(Color selectedColor) {
+        this.selectedColor = selectedColor;
     }
     
     //Mouse events
