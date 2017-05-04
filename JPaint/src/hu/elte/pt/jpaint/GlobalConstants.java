@@ -10,6 +10,8 @@ public class GlobalConstants {
         PENCIL,
         RECTANGLE,
         LINE,
-        CIRCLE
+        CIRCLE,
+        BRUSH,
+        ERASER
     }
 }

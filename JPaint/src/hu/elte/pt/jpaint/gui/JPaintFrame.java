@@ -10,6 +10,8 @@ import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import javax.swing.filechooser.*;
 
 /**
@@ -27,6 +29,7 @@ public class JPaintFrame extends JFrame {
     private String imageTitle = "JPaint";
     private CanvasPanel canvas = null;
     private JLabel frameHeader = new JLabel();
+    private int brushRadius = BRUSH_RADIUS_INIT;
 
     /*
      * These menu items had to be moved outside of the setup function in 
@@ -57,6 +60,7 @@ public class JPaintFrame extends JFrame {
     private ActionListener rectangleAction;
     private ActionListener circleAction;
     private ActionListener lineAction;
+    private ChangeListener brushRadiusAction;
     
     private ActionListener colorBlackAction;
     private ActionListener colorRedAction;
@@ -167,9 +171,11 @@ public class JPaintFrame extends JFrame {
 
         brushUtilityButton.setFont(JPAINT_UTILITY_FONT);
         brushUtilityButton.setBackground(UTILITY_BUTTON_COLOR);
+        brushUtilityButton.addActionListener(brushAction);
 
         eraserUtilityButton.setFont(JPAINT_UTILITY_FONT);
         eraserUtilityButton.setBackground(UTILITY_BUTTON_COLOR);
+        eraserUtilityButton.addActionListener(eraserAction);
 
         paintBucketUtilityButton.setFont(JPAINT_UTILITY_FONT);
         paintBucketUtilityButton.setBackground(UTILITY_BUTTON_COLOR);
@@ -290,8 +296,27 @@ public class JPaintFrame extends JFrame {
         colorsPanel.add(wildcard1ColorButton);
         colorsPanel.add(wildcard2ColorButton);
         colorsPanel.add(wildcard3ColorButton);
+        
+        colorsPanel.add(new JSeparator(JSeparator.VERTICAL));
+        colorsPanel.add(brushRadiusSliderCreator());
 
         add(colorsPanel, BorderLayout.PAGE_END);
+    }
+    
+    private JSlider brushRadiusSliderCreator(){
+        JSlider brushRadiusSlider = new JSlider(JSlider.HORIZONTAL, 
+                                                BRUSH_RADIUS_MIN, 
+                                                BRUSH_RADIUS_MAX, 
+                                                BRUSH_RADIUS_INIT);
+        
+        brushRadiusSlider.setMajorTickSpacing(20);
+        brushRadiusSlider.setMinorTickSpacing(5);
+        brushRadiusSlider.setPaintTicks(true);
+        brushRadiusSlider.setPaintLabels(true);
+        
+        brushRadiusSlider.addChangeListener(brushRadiusAction);
+        
+        return brushRadiusSlider;
     }
 
     public CanvasPanel getCanvas() {
@@ -309,13 +334,17 @@ public class JPaintFrame extends JFrame {
         }
 
         imageTitle = JOptionPane.showInputDialog(IMAGE_NAME_MESSAGE);
-        if (imageTitle.equals("")) {
-            JOptionPane.showMessageDialog(this, "Please enter a valid name");
-            createDrawableCanvas();
+        try {
+            if (imageTitle.equals("")) {
+                JOptionPane.showMessageDialog(this, "Please enter a valid name");
+                createDrawableCanvas();
+            }
+        } catch(NullPointerException npe){
+            return;
         }
 
         frameHeader.setText(imageTitle);
-        canvas = new CanvasPanel(selectedColorButton.getBackground());
+        canvas = new CanvasPanel(selectedColorButton.getBackground(), brushRadius);
         
         // enabling disabled buttons
         clearCanvasMenuItem.setEnabled(true);
@@ -339,7 +368,7 @@ public class JPaintFrame extends JFrame {
             int clearCanvasConfirmation = JOptionPane.showConfirmDialog(null, CLEAR_IMAGE_WINDOW_MESSAGE, CLEAR_IMAGE_WINDOW_TITLE, JOptionPane.YES_NO_OPTION);
             if (clearCanvasConfirmation == JOptionPane.YES_OPTION) {
                 this.getContentPane().remove(canvas);
-                canvas = new CanvasPanel(selectedColorButton.getBackground());
+                canvas = new CanvasPanel(selectedColorButton.getBackground(), brushRadius);
                 add(canvas, FlowLayout.CENTER);
                 revalidate();
                 repaint();
@@ -467,7 +496,21 @@ public class JPaintFrame extends JFrame {
         pencilAction = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                drawWithPencil();
+                canvas.setSelectedTool(GlobalConstants.PaintTool.PENCIL);
+            }
+        };
+        
+        brushAction = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                canvas.setSelectedTool(GlobalConstants.PaintTool.BRUSH);
+            }
+        };
+        
+        eraserAction = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                canvas.setSelectedTool(GlobalConstants.PaintTool.ERASER);
             }
         };
 
@@ -531,6 +574,19 @@ public class JPaintFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 //canvas.setSelectedColor(Color.GREEN);
                 setSelectedColorButton(greenButton);
+            }
+        };
+        
+        brushRadiusAction = new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent ce) {
+                JSlider source = (JSlider)ce.getSource();
+                if(!source.getValueIsAdjusting()){
+                    brushRadius = (int)source.getValue();
+                    if(canvas != null){
+                        canvas.setBrushRadius(brushRadius);
+                    }
+                }
             }
         };
 

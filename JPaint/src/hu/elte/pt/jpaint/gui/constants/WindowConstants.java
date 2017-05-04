@@ -41,4 +41,7 @@ public class WindowConstants {
     public static final String CLOSE_IMAGE_WINDOW_TITLE = "You seem to have an open canvas.";
     public static final String CLOSE_IMAGE_WINDOW_MESSAGE = "Are you sure you want to close it?";
     
+    public static final int BRUSH_RADIUS_MIN = 0;
+    public static final int BRUSH_RADIUS_MAX = 100;
+    public static final int BRUSH_RADIUS_INIT = 15;
 }
