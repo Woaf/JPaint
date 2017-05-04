@@ -1,6 +1,7 @@
 package hu.elte.pt.jpaint.logic.canvas;
 
 import hu.elte.pt.jpaint.GlobalConstants.PaintTool;
+import static hu.elte.pt.jpaint.gui.constants.WindowConstants.BRUSH_RADIUS_INIT;
 import hu.elte.pt.jpaint.logic.drawable.Drawable;
 import hu.elte.pt.jpaint.logic.drawable.shape.*;
 import javax.swing.*;
@@ -17,10 +18,12 @@ public class CanvasPanel extends JPanel implements MouseMotionListener, MouseLis
     private ArrayList canvasElements;
     private PaintTool selectedTool;
     private Color selectedColor;
+    private int brushRadius;
         
-    public CanvasPanel(Color selectedColor) {
+    public CanvasPanel(Color selectedColor, int brushRadius) {
         this.addMouseListener(this);
         this.addMouseMotionListener(this);
+        this.brushRadius = brushRadius;
         
         canvasElements = new ArrayList();
         this.setLayout(new FlowLayout(FlowLayout.CENTER));
@@ -39,7 +42,16 @@ public class CanvasPanel extends JPanel implements MouseMotionListener, MouseLis
                 drawnObject = new Circle(getMousePosition(), getMousePosition(),  selectedColor);
                 break;
             case LINE:
-               drawnObject = new Line(getMousePosition(), getMousePosition(), selectedColor);
+                drawnObject = new Line(getMousePosition(), getMousePosition(), selectedColor);
+                break;
+            case PENCIL:
+                drawnObject = new Pencil(getMousePosition(), selectedColor);
+                break;
+            case BRUSH:
+                drawnObject = new Brush(getMousePosition(), brushRadius, selectedColor);
+                break;
+            case ERASER:
+                drawnObject = new Brush(getMousePosition(), brushRadius, Color.WHITE);
                 break;
             default:
                 drawnObject = null; 
@@ -48,9 +60,15 @@ public class CanvasPanel extends JPanel implements MouseMotionListener, MouseLis
     }
     
     public void draw() {
-        if(this.selectedTool != null) {
+        if(getMousePosition() != null && this.selectedTool != null) {
             Drawable currentObject = ((Drawable)(canvasElements.get(canvasElements.size()-1)));
-            ((PaintShape)currentObject).setCurrentPoint(getMousePosition());            
+            if(currentObject instanceof Pencil){
+                ((Pencil) currentObject).addPoint(getMousePosition());
+            } else if(currentObject instanceof Brush) {
+                ((Brush) currentObject).addPoint(getMousePosition());
+            } else {
+                ((PaintShape)currentObject).setCurrentPoint(getMousePosition());
+            }
             repaint();
         }
     }
@@ -74,6 +92,10 @@ public class CanvasPanel extends JPanel implements MouseMotionListener, MouseLis
         this.selectedColor = selectedColor;
     }
     
+    public void setBrushRadius(int brushRadius) {
+        this.brushRadius = brushRadius;
+    }
+    
     //Mouse events
     @Override
     public void mouseClicked(MouseEvent e) {
@@ -81,7 +103,7 @@ public class CanvasPanel extends JPanel implements MouseMotionListener, MouseLis
 
     @Override
     public void mousePressed(MouseEvent e) {
-        if(this.selectedTool != null)
+        if(getMousePosition() != null && this.selectedTool != null)
             beginDrawing();
     }
 
