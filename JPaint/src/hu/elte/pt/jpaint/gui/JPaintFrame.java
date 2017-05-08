@@ -76,8 +76,9 @@ public class JPaintFrame extends JFrame {
     private JButton wildcard1ColorButton = new JButton();
     private JButton wildcard2ColorButton = new JButton();
     private JButton wildcard3ColorButton = new JButton();
+    
     private JButton selectedColorButton; 
-
+    private JButton selectedToolButton;
     /**
      * The constructor of this class sets up the window of the JPaint
      * application. It uses several methods to set up each component of the user
@@ -411,8 +412,20 @@ public class JPaintFrame extends JFrame {
         //Sets a new selected color button
         this.selectedColorButton = selectedColorButton;
         this.selectedColorButton.setBorder(BorderFactory.createBevelBorder(1, Color.BLACK, Color.WHITE));
-        if(canvas != null)
+        if(canvas != null) {
             canvas.setSelectedColor(this.selectedColorButton.getBackground());
+        }
+    }
+    
+    private void setSelectedToolButton(JButton selectedToolButton, GlobalConstants.PaintTool selectedTool) {
+        if(this.selectedToolButton != null)
+            this.selectedToolButton.setBorder(BorderFactory.createLineBorder(Color.GRAY));
+        //Sets a new selected color button
+        this.selectedToolButton = selectedToolButton;
+        this.selectedToolButton.setBorder(BorderFactory.createBevelBorder(1, Color.BLACK, Color.WHITE));
+        if(canvas != null) {
+            canvas.setSelectedTool(selectedTool);
+        }   
     }
 
     private void drawWithPencil() {
@@ -496,21 +509,21 @@ public class JPaintFrame extends JFrame {
         pencilAction = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                canvas.setSelectedTool(GlobalConstants.PaintTool.PENCIL);
+                setSelectedToolButton(pencilUtilityButton, GlobalConstants.PaintTool.PENCIL);
             }
         };
         
         brushAction = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                canvas.setSelectedTool(GlobalConstants.PaintTool.BRUSH);
+                setSelectedToolButton(brushUtilityButton, GlobalConstants.PaintTool.BRUSH);
             }
         };
         
         eraserAction = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                canvas.setSelectedTool(GlobalConstants.PaintTool.ERASER);
+                setSelectedToolButton(eraserUtilityButton, GlobalConstants.PaintTool.ERASER);
             }
         };
 
@@ -518,7 +531,7 @@ public class JPaintFrame extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent ae) {
-                canvas.setSelectedTool(GlobalConstants.PaintTool.RECTANGLE);
+                setSelectedToolButton(rectangleUtilityButton, GlobalConstants.PaintTool.RECTANGLE);
             }
         };
 
@@ -526,21 +539,20 @@ public class JPaintFrame extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent ae) {
-                canvas.setSelectedTool(GlobalConstants.PaintTool.CIRCLE);
+                setSelectedToolButton(circleUtilityButton, GlobalConstants.PaintTool.CIRCLE);
             }
         };
 
         lineAction = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                canvas.setSelectedTool(GlobalConstants.PaintTool.LINE);
+                setSelectedToolButton(lineUtilityButton, GlobalConstants.PaintTool.LINE);
             }
         };
         
         colorBlackAction = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //canvas.setSelectedColor(Color.BLACK);
                 setSelectedColorButton(blackButton);
             }
         };
@@ -548,7 +560,6 @@ public class JPaintFrame extends JFrame {
         colorRedAction = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //canvas.setSelectedColor(Color.RED);
                 setSelectedColorButton(redButton);
             }
         };
@@ -556,7 +567,6 @@ public class JPaintFrame extends JFrame {
         colorBlueAction = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //canvas.setSelectedColor(Color.BLUE);
                 setSelectedColorButton(blueButton);
             }
         };
@@ -564,7 +574,6 @@ public class JPaintFrame extends JFrame {
         colorYellowAction = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //canvas.setSelectedColor(Color.YELLOW);
                 setSelectedColorButton(yellowButton);
             }
         };
@@ -572,7 +581,6 @@ public class JPaintFrame extends JFrame {
         colorGreenAction = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //canvas.setSelectedColor(Color.GREEN);
                 setSelectedColorButton(greenButton);
             }
         };

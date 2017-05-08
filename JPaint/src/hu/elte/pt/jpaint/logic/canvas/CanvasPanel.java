@@ -30,6 +30,9 @@ public class CanvasPanel extends JPanel implements MouseMotionListener, MouseLis
         this.setSize(200, 200);
         this.setBackground(Color.WHITE);
         this.selectedColor = selectedColor;
+        
+        //Change cursor type on the canvas for better visibility
+        this.setCursor(new Cursor(Cursor.CROSSHAIR_CURSOR));
     }
     
     public void beginDrawing() {
@@ -77,9 +80,26 @@ public class CanvasPanel extends JPanel implements MouseMotionListener, MouseLis
     public void paintComponent(Graphics g)
     {
         super.paintComponent(g);
-        
+        //Print canvas elements
         for(Object element : canvasElements) {
             ((Drawable)element).draw(g);
+        }   
+        
+        //Store the mouse position so it doesn't change during the drawing, which could result in NullPointerException if outside of canvas
+        Point lastMousePosition = getMousePosition();
+        if( lastMousePosition != null) {
+            //For brush and eraser tools display circle around the cursor
+            if(selectedTool == PaintTool.BRUSH || selectedTool == PaintTool.ERASER) {
+                Graphics2D g2d = (Graphics2D)g;
+                g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                
+                if(selectedTool == PaintTool.ERASER)
+                    g2d.setColor(Color.WHITE);
+                else 
+                    g2d.setColor(selectedColor);
+                
+                g2d.fillOval(lastMousePosition.x-brushRadius, lastMousePosition.y-brushRadius, 2*brushRadius, 2*brushRadius);
+            }
         }
     }
     
@@ -94,6 +114,14 @@ public class CanvasPanel extends JPanel implements MouseMotionListener, MouseLis
     
     public void setBrushRadius(int brushRadius) {
         this.brushRadius = brushRadius;
+    }
+    
+    public PaintTool getSelectedTool() {
+        return this.selectedTool;
+    }
+    
+    public Color getSelectedColor() {
+        return this.selectedColor;
     }
     
     //Mouse events
@@ -128,5 +156,6 @@ public class CanvasPanel extends JPanel implements MouseMotionListener, MouseLis
 
     @Override
     public void mouseMoved(MouseEvent e) {
+        repaint();
     }
 }
