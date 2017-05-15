@@ -8,6 +8,7 @@ import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
@@ -46,6 +47,7 @@ public class JPaintFrame extends JFrame {
     private JButton rectangleUtilityButton = new JButton(RECTANGLE_UTILITY_TEXT);
     private JButton circleUtilityButton = new JButton(CIRCLE_UTILITY_TEXT);
     private JButton lineUtilityButton = new JButton(LINE_UTILITY_TEXT);
+    private JButton undoUtilityButton = new JButton(UNDO_UTILITY_TEXT);
     
     private ActionListener createCanvas;
     private ActionListener clearCanvas;
@@ -60,6 +62,7 @@ public class JPaintFrame extends JFrame {
     private ActionListener rectangleAction;
     private ActionListener circleAction;
     private ActionListener lineAction;
+    private ActionListener undoAction;
     private ChangeListener brushRadiusAction;
     
     private ActionListener colorBlackAction;
@@ -192,6 +195,10 @@ public class JPaintFrame extends JFrame {
         lineUtilityButton.setFont(JPAINT_UTILITY_FONT);
         lineUtilityButton.setBackground(UTILITY_BUTTON_COLOR);
         lineUtilityButton.addActionListener(lineAction);
+        
+        undoUtilityButton.setFont(JPAINT_UTILITY_FONT);
+        undoUtilityButton.setBackground(UTILITY_BUTTON_COLOR);
+        undoUtilityButton.addActionListener(undoAction);
 
         //disabling these buttons by default
         pencilUtilityButton.setEnabled(false);
@@ -201,6 +208,7 @@ public class JPaintFrame extends JFrame {
         rectangleUtilityButton.setEnabled(false);
         circleUtilityButton.setEnabled(false);
         lineUtilityButton.setEnabled(false);
+        undoUtilityButton.setEnabled(false);
 
         utilityButtonHolder.add(pencilUtilityButton);
         utilityButtonHolder.add(brushUtilityButton);
@@ -209,6 +217,7 @@ public class JPaintFrame extends JFrame {
         utilityButtonHolder.add(rectangleUtilityButton);
         utilityButtonHolder.add(circleUtilityButton);
         utilityButtonHolder.add(lineUtilityButton);
+        utilityButtonHolder.add(undoUtilityButton);
 
         utilitiesPanel.add(utilityButtonHolder);
         add(utilitiesPanel, BorderLayout.WEST);
@@ -359,6 +368,7 @@ public class JPaintFrame extends JFrame {
         rectangleUtilityButton.setEnabled(true);
         circleUtilityButton.setEnabled(true);
         lineUtilityButton.setEnabled(true);
+        undoUtilityButton.setEnabled(true);
 
         add(canvas, FlowLayout.CENTER);
         revalidate();
@@ -547,6 +557,16 @@ public class JPaintFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 setSelectedToolButton(lineUtilityButton, GlobalConstants.PaintTool.LINE);
+            }
+        };
+        
+        undoAction = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                ArrayList canvasElements = canvas.getCanvasElements();
+                if(!canvasElements.isEmpty())
+                    canvasElements.remove(canvasElements.size() - 1);
+                canvas.repaint();
             }
         };
         

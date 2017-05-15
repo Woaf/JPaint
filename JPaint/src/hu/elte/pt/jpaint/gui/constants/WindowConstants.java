@@ -34,6 +34,7 @@ public class WindowConstants {
     public static final String RECTANGLE_UTILITY_TEXT = "Rectangle";
     public static final String CIRCLE_UTILITY_TEXT = "Circle";
     public static final String LINE_UTILITY_TEXT = "Line";
+    public static final String UNDO_UTILITY_TEXT = "Undo";
     
     public static final String IMAGE_NAME_MESSAGE = "Please enter a name for your image:";
     public static final String CLEAR_IMAGE_WINDOW_TITLE = "You seem to have an open canvas.";

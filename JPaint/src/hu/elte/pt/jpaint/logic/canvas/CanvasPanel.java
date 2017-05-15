@@ -124,6 +124,10 @@ public class CanvasPanel extends JPanel implements MouseMotionListener, MouseLis
         return this.selectedColor;
     }
     
+    public ArrayList getCanvasElements() {
+        return this.canvasElements;
+    }
+    
     //Mouse events
     @Override
     public void mouseClicked(MouseEvent e) {
