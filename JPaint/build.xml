@@ -1,15 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- You may freely edit this file. See commented blocks below for -->
-<!-- some examples of how to customize the build. -->
-<!-- (If you delete it and reopen the project it will be recreated.) -->
-<!-- By default, only the Clean and Build commands use this build script. -->
-<!-- Commands such as Run, Debug, and Test only use this build script if -->
-<!-- the Compile on Save feature is turned off for the project. -->
-<!-- You can turn off the Compile on Save (or Deploy on Save) setting -->
-<!-- in the project's Project Properties dialog box.-->
+
 <project name="JPaint" default="default" basedir=".">
     <description>Builds, tests, and runs the project JPaint.</description>
     <import file="nbproject/build-impl.xml"/>
+    
+    <property name="src.dir" value="src/hu/elte/pt/jpaint"/>
+    
+    <property name="build.dir" value="jpaint-build"/>
+    <property name="classes.dir" value="${build.dir}/classes"/>
+    <property name="jar.dir" value="jpaint-disrtibute"/>
+    
+    <property name="main-class" value="hu.elte.pt.jpaint.JPaint"/>
+    
+    <target name="clean">
+        <echo message="DELETING: 'build', 'classes', and 'distribute' directories..."/>
+        <echo message="'build'..."/>
+        <delete dir="${build.dir}"/>
+        <echo message="Success!" level="info"/>
+        <echo message="'classes'..."/>
+        <delete dir="${classes.dir}"/>
+        <echo message="Success!" level="info"/>
+        <echo message="'distributable'..."/>
+        <delete dir="${jar.dir}"/>
+        <echo message="Success!" level="info"/>
+        <echo message="CLEAN SUCCESSFUL" level="info"/>
+        <echo message="----------" level="info"/>
+    </target>
+    
+    <target name="compile">
+        <echo message="Creating classes directory..."/>
+        <mkdir dir="${classes.dir}"/>
+        <echo message="Success!" level="info"/>
+        <echo message="Compiling JAVA sourcefiles..."/>
+        <javac includeantruntime="false" srcdir="${src.dir}" destdir="${classes.dir}"/>
+        <echo message="Success!" level="info"/>
+        <echo message="COMPILE SUCCESSFUL" level="info"/>
+        <echo message="----------" level="info"/>
+    </target>
+    
+    <target name="jar" depends="compile">
+        <echo message="Creating distributable directory..."/>
+        <mkdir dir="${jar.dir}"/>
+        <echo message="Success!" level="info"/>
+        <echo message="Creating .jar distributable application..."/>
+        <jar destfile="${jar.dir}/${ant.project.name}.jar" basedir="${classes.dir}">
+            <manifest>
+                <attribute name="Main-Class" value="${main-class}"/>
+            </manifest>
+        </jar>
+        <echo message="Success!" level="info"/>
+        <echo message="Deleting 'classes' directory..."/>
+        <delete dir="${classes.dir}"/>
+        <echo message="Success!" level="info"/>
+        <echo message="JAR SUCCESSFUL" level="info"/>
+        <echo message="----------" level="info"/>
+    </target>
+    
+    <target name="run">
+        <echo message="i call run!"/>
+        <java jar="${jar.dir}/${ant.project.name}.jar" fork="true"/>
+    </target> 
+    
+    <target name="clean-build" depends="clean,jar"/>
+    <target name="main" depends="clean,run"/>
     <!--
 
     There exist several targets which are by default empty and which can be 
@@ -40,19 +93,15 @@
             </obfuscate>
         </target>
 
-    For list of available properties check the imported 
-    nbproject/build-impl.xml file. 
-
-
     Another way to customize the build is by overriding existing main targets.
     The targets of interest are: 
 
       -init-macrodef-javac:     defines macro for javac compilation
       -init-macrodef-junit:     defines macro for junit execution
-      -init-macrodef-debug:     defines macro for class debugging
+
       -init-macrodef-java:      defines macro for class execution
       -do-jar:                  JAR building
-      run:                      execution of project 
+
       -javadoc-build:           Javadoc generation
       test-report:              JUnit report generation
 
@@ -63,11 +112,6 @@
                 <arg file="${dist.jar}"/>
             </exec>
         </target>
-
-    Notice that the overridden target depends on the jar target and not only on 
-    the compile target as the regular run target does. Again, for a list of available 
-    properties which you can use, check the target you are overriding in the
-    nbproject/build-impl.xml file. 
 
     -->
 </project>
