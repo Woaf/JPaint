@@ -11,5 +11,4 @@ public abstract class Drawable {
     boolean isMousePressed = false;
     public abstract void draw(Graphics g);
     
-    
 }

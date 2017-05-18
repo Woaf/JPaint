@@ -1,7 +1,6 @@
 package hu.elte.pt.jpaint.logic.canvas;
 
 import hu.elte.pt.jpaint.GlobalConstants.PaintTool;
-import static hu.elte.pt.jpaint.gui.constants.WindowConstants.BRUSH_RADIUS_INIT;
 import hu.elte.pt.jpaint.logic.drawable.Drawable;
 import hu.elte.pt.jpaint.logic.drawable.shape.*;
 import javax.swing.*;
