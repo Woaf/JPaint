@@ -6,6 +6,12 @@ package hu.elte.pt.jpaint;
  * @version 0.0.1
  */
 public class GlobalConstants {
+    
+    /**
+     * Collection of the available tools for painting.
+     * 
+     */
+    
     public static enum PaintTool {
         PENCIL,
         RECTANGLE,

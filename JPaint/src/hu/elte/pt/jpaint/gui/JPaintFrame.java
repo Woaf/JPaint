@@ -98,6 +98,10 @@ public class JPaintFrame extends JFrame {
         setSelectedColorButton(blackButton);
     }
 
+    /**
+     * Initializes the main wiondow.
+     *
+     */
     public void initFrame() {
         setTitle(WINDOW_TITLE);
         setSize(new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT));
@@ -322,6 +326,11 @@ public class JPaintFrame extends JFrame {
         return brushRadiusSlider;
     }
 
+    /**
+     * Returns the canvas element of the window. Returns null if it has none.
+     *
+     * @return the canvas element of the window.
+     */
     public CanvasPanel getCanvas() {
         return canvas;
     }

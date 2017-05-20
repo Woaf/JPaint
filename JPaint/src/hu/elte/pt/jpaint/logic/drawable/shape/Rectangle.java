@@ -7,22 +7,27 @@ import java.awt.*;
  * @author Bálint Fazekas
  */
 public class Rectangle extends PaintShape {
+
+    /**
+     * This constructor initializes a basic Rectangle with two points and 
+     * sets the drawing color. The rectangle's opposite corners will be at the 
+     * coordinates of the startingPoint and the currentPoint.
+     * 
+     * Note, that none of the parameters should be negative, otherwise the rectangle
+     * will be created with negative dimensional properties which makes it practically
+     * invisible for the user, but still creating an object within the memory. 
+     * 
+     * @param startingPoint one of the opposing corners' coordinate of the rectangle.
+     * @param currentPoint the coordinates of the opposite corner to the startingPoint.
+     * @param selectedColor the rectangle's color parameter.
+     */
     public Rectangle(Point startingPoint, Point currentPoint, Color selectedColor) {
         super(startingPoint, currentPoint, selectedColor);
     }
 
     /**
-     * Using this method below, the user is now able to create a rectangle of any shape. 
      * 
-     * The drawRect function requires the following parameters: 
-     * - x coordinate of the starting point
-     * - y coordinate of the starting point
-     * - width of the rectangle
-     * - height of the rectangle
-     * 
-     * Note, that none of the parameters should be negative, otherwise the rectangle
-     * will be created with negative dimensional properties which makes it practically
-     * invisible for the user, but still creating an object within the memory. 
+     * @param g the graphical object that draws the shapes.
      */
     
     @Override
@@ -51,6 +56,7 @@ public class Rectangle extends PaintShape {
      * @param current 
      * @return lesser of the two values
      */
+    
     private int returnStartingPointValue(int start, int current) {
         return (start > current ? current : start);
     }
@@ -64,6 +70,7 @@ public class Rectangle extends PaintShape {
      * @param current
      * @return absolute difference between two values
      */
+    
     private int returnDistanceBetweenTwoPoints(int start, int current) {
         return Math.abs(start-current);
     }
