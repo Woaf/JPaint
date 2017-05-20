@@ -9,6 +9,7 @@
     <property name="build.dir" value="jpaint-build"/>
     <property name="classes.dir" value="${build.dir}/classes"/>
     <property name="jar.dir" value="jpaint-disrtibute"/>
+    <property name="doc.dir" value="${build.dir}/doc"/>
     
     <property name="main-class" value="hu.elte.pt.jpaint.JPaint"/>
     
@@ -35,6 +36,8 @@
         <javac includeantruntime="false" srcdir="${src.dir}" destdir="${classes.dir}"/>
         <echo message="Success!" level="info"/>
         <echo message="COMPILE SUCCESSFUL" level="info"/>
+        <echo message="Creating JavaDoc..." level="info"/>
+        <javadoc sourcepath="./src" destdir="${doc.dir}"/>
         <echo message="----------" level="info"/>
     </target>
     
@@ -55,14 +58,12 @@
         <echo message="JAR SUCCESSFUL" level="info"/>
         <echo message="----------" level="info"/>
     </target>
-    
+        
     <target name="run">
-        <echo message="i call run!"/>
-        <java jar="${jar.dir}/${ant.project.name}.jar" fork="true"/>
-    </target> 
+        <echo message="i am run"/>
+        <java jar="${jar.dir}/${ant.project.name}.jar"/>
+    </target>
     
-    <target name="clean-build" depends="clean,jar"/>
-    <target name="main" depends="clean,run"/>
     <!--
 
     There exist several targets which are by default empty and which can be 

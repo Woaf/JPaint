@@ -90,10 +90,6 @@ public class JPaintFrame extends JFrame {
         return canvas;
     }
     
-    /**
-     * Getters and setters are defined.
-     */
-    
     public int getBrushRadius() {
         return brushRadius;
     }
