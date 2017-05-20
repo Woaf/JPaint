@@ -43,7 +43,6 @@ public class JPaintFrame extends JFrame {
     private JButton pencilUtilityButton = new JButton(PENCIL_UTILITY_TEXT);
     private JButton brushUtilityButton = new JButton(BRUSH_UTILITY_TEXT);
     private JButton eraserUtilityButton = new JButton(ERASER_UTILITY_TEXT);
-    private JButton paintBucketUtilityButton = new JButton(BUCKET_UTILITY_TEXT);
     private JButton rectangleUtilityButton = new JButton(RECTANGLE_UTILITY_TEXT);
     private JButton circleUtilityButton = new JButton(CIRCLE_UTILITY_TEXT);
     private JButton lineUtilityButton = new JButton(LINE_UTILITY_TEXT);
@@ -58,7 +57,6 @@ public class JPaintFrame extends JFrame {
     private ActionListener pencilAction;
     private ActionListener brushAction;
     private ActionListener eraserAction;
-    private ActionListener bucketAction;
     private ActionListener rectangleAction;
     private ActionListener circleAction;
     private ActionListener lineAction;
@@ -181,9 +179,6 @@ public class JPaintFrame extends JFrame {
         eraserUtilityButton.setBackground(UTILITY_BUTTON_COLOR);
         eraserUtilityButton.addActionListener(eraserAction);
 
-        paintBucketUtilityButton.setFont(JPAINT_UTILITY_FONT);
-        paintBucketUtilityButton.setBackground(UTILITY_BUTTON_COLOR);
-
         rectangleUtilityButton.setFont(JPAINT_UTILITY_FONT);
         rectangleUtilityButton.setBackground(UTILITY_BUTTON_COLOR);
         rectangleUtilityButton.addActionListener(rectangleAction);
@@ -204,7 +199,6 @@ public class JPaintFrame extends JFrame {
         pencilUtilityButton.setEnabled(false);
         brushUtilityButton.setEnabled(false);
         eraserUtilityButton.setEnabled(false);
-        paintBucketUtilityButton.setEnabled(false);
         rectangleUtilityButton.setEnabled(false);
         circleUtilityButton.setEnabled(false);
         lineUtilityButton.setEnabled(false);
@@ -213,7 +207,6 @@ public class JPaintFrame extends JFrame {
         utilityButtonHolder.add(pencilUtilityButton);
         utilityButtonHolder.add(brushUtilityButton);
         utilityButtonHolder.add(eraserUtilityButton);
-        utilityButtonHolder.add(paintBucketUtilityButton);
         utilityButtonHolder.add(rectangleUtilityButton);
         utilityButtonHolder.add(circleUtilityButton);
         utilityButtonHolder.add(lineUtilityButton);
@@ -364,7 +357,6 @@ public class JPaintFrame extends JFrame {
         pencilUtilityButton.setEnabled(true);
         brushUtilityButton.setEnabled(true);
         eraserUtilityButton.setEnabled(true);
-        paintBucketUtilityButton.setEnabled(true);
         rectangleUtilityButton.setEnabled(true);
         circleUtilityButton.setEnabled(true);
         lineUtilityButton.setEnabled(true);
@@ -404,10 +396,10 @@ public class JPaintFrame extends JFrame {
                     pencilUtilityButton.setEnabled(false);
                     brushUtilityButton.setEnabled(false);
                     eraserUtilityButton.setEnabled(false);
-                    paintBucketUtilityButton.setEnabled(false);
                     rectangleUtilityButton.setEnabled(false);
                     circleUtilityButton.setEnabled(false);
                     lineUtilityButton.setEnabled(false);
+                    undoUtilityButton.setEnabled(false);
 
                     repaint();
                 }
@@ -430,7 +422,7 @@ public class JPaintFrame extends JFrame {
     private void setSelectedToolButton(JButton selectedToolButton, GlobalConstants.PaintTool selectedTool) {
         if(this.selectedToolButton != null)
             this.selectedToolButton.setBorder(BorderFactory.createLineBorder(Color.GRAY));
-        //Sets a new selected color button
+        //Sets a new selected tool button
         this.selectedToolButton = selectedToolButton;
         this.selectedToolButton.setBorder(BorderFactory.createBevelBorder(1, Color.BLACK, Color.WHITE));
         if(canvas != null) {
