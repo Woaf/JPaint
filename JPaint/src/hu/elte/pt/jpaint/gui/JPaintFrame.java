@@ -575,6 +575,7 @@ public class JPaintFrame extends JFrame {
                     rectangleUtilityButton.setEnabled(false);
                     circleUtilityButton.setEnabled(false);
                     lineUtilityButton.setEnabled(false);
+                    undoUtilityButton.setEnabled(false);
 
                     repaint();
                 }
