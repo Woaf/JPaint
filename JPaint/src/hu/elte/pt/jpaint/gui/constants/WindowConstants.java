@@ -30,7 +30,6 @@ public class WindowConstants {
     public static final String PENCIL_UTILITY_TEXT = "Pencil";
     public static final String BRUSH_UTILITY_TEXT = "Brush";
     public static final String ERASER_UTILITY_TEXT = "Eraser";
-    public static final String BUCKET_UTILITY_TEXT = "Bucket";
     public static final String RECTANGLE_UTILITY_TEXT = "Rectangle";
     public static final String CIRCLE_UTILITY_TEXT = "Circle";
     public static final String LINE_UTILITY_TEXT = "Line";
