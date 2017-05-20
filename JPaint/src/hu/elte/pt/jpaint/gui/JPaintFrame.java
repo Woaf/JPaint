@@ -80,6 +80,185 @@ public class JPaintFrame extends JFrame {
     
     private JButton selectedColorButton; 
     private JButton selectedToolButton;
+    
+    /**
+     * Returns the canvas element of the window. Returns null if it has none.
+     *
+     * @return the canvas element of the window.
+     */
+    public CanvasPanel getCanvas() {
+        return canvas;
+    }
+    
+    /**
+     * Getters and setters are defined.
+     */
+    
+    public int getBrushRadius() {
+        return brushRadius;
+    }
+
+    public JButton getPencilUtilityButton() {
+        return pencilUtilityButton;
+    }
+
+    public JButton getBrushUtilityButton() {
+        return brushUtilityButton;
+    }
+
+    public JButton getEraserUtilityButton() {
+        return eraserUtilityButton;
+    }
+
+    public JButton getRectangleUtilityButton() {
+        return rectangleUtilityButton;
+    }
+
+    public JButton getCircleUtilityButton() {
+        return circleUtilityButton;
+    }
+
+    public JButton getLineUtilityButton() {
+        return lineUtilityButton;
+    }
+
+    public JButton getBlackButton() {
+        return blackButton;
+    }
+
+    public JButton getRedButton() {
+        return redButton;
+    }
+
+    public JButton getBlueButton() {
+        return blueButton;
+    }
+
+    public JButton getYellowButton() {
+        return yellowButton;
+    }
+
+    public JButton getGreenButton() {
+        return greenButton;
+    }
+
+    public JButton getWildcard1ColorButton() {
+        return wildcard1ColorButton;
+    }
+
+    public JButton getWildcard2ColorButton() {
+        return wildcard2ColorButton;
+    }
+
+    public JButton getWildcard3ColorButton() {
+        return wildcard3ColorButton;
+    }
+
+    public String getImageTitle() {
+        return imageTitle;
+    }
+
+    public JLabel getFrameHeader() {
+        return frameHeader;
+    }
+
+    public JMenuItem getClearCanvasMenuItem() {
+        return clearCanvasMenuItem;
+    }
+
+    public JMenuItem getSaveImageMenuItem() {
+        return saveImageMenuItem;
+    }
+
+    public JMenuItem getCloseImageMenuItem() {
+        return closeImageMenuItem;
+    }
+
+    public JButton getUndoUtilityButton() {
+        return undoUtilityButton;
+    }
+
+    public ActionListener getCreateCanvas() {
+        return createCanvas;
+    }
+
+    public ActionListener getClearCanvas() {
+        return clearCanvas;
+    }
+
+    public ActionListener getSaveImage() {
+        return saveImage;
+    }
+
+    public ActionListener getCloseImage() {
+        return closeImage;
+    }
+
+    public ActionListener getCloseWindow() {
+        return closeWindow;
+    }
+
+    public ActionListener getPencilAction() {
+        return pencilAction;
+    }
+
+    public ActionListener getBrushAction() {
+        return brushAction;
+    }
+
+    public ActionListener getEraserAction() {
+        return eraserAction;
+    }
+
+    public ActionListener getRectangleAction() {
+        return rectangleAction;
+    }
+
+    public ActionListener getCircleAction() {
+        return circleAction;
+    }
+
+    public ActionListener getLineAction() {
+        return lineAction;
+    }
+
+    public ActionListener getUndoAction() {
+        return undoAction;
+    }
+
+    public ChangeListener getBrushRadiusAction() {
+        return brushRadiusAction;
+    }
+
+    public ActionListener getColorBlackAction() {
+        return colorBlackAction;
+    }
+
+    public ActionListener getColorRedAction() {
+        return colorRedAction;
+    }
+
+    public ActionListener getColorBlueAction() {
+        return colorBlueAction;
+    }
+
+    public ActionListener getColorYellowAction() {
+        return colorYellowAction;
+    }
+
+    public ActionListener getColorGreenAction() {
+        return colorGreenAction;
+    }
+
+    public JButton getSelectedColorButton() {
+        return selectedColorButton;
+    }
+
+    public JButton getSelectedToolButton() {
+        return selectedToolButton;
+    }
+    
+    
     /**
      * The constructor of this class sets up the window of the JPaint
      * application. It uses several methods to set up each component of the user
@@ -99,7 +278,7 @@ public class JPaintFrame extends JFrame {
     }
 
     /**
-     * Initializes the main wiondow.
+     * Initializes the main window.
      *
      */
     public void initFrame() {
@@ -259,11 +438,10 @@ public class JPaintFrame extends JFrame {
             @Override
             public void mousePressed(MouseEvent e) {
                 if(SwingUtilities.isRightMouseButton(e)) {
-                    wildcard1ColorButton.setBackground(
-                        colorChooser.showDialog(JPaintFrame.this, "Color picker", wildcard1ColorButton.getBackground())
+                    getWildcard1ColorButton().setBackground(colorChooser.showDialog(JPaintFrame.this, "Color picker", getWildcard1ColorButton().getBackground())
                     );
                 } else if(SwingUtilities.isLeftMouseButton(e)) {
-                    setSelectedColorButton(wildcard1ColorButton);
+                    setSelectedColorButton(getWildcard1ColorButton());
                 }
             }
         });
@@ -272,11 +450,10 @@ public class JPaintFrame extends JFrame {
             @Override
             public void mousePressed(MouseEvent e) {
                 if(SwingUtilities.isRightMouseButton(e)) {
-                    wildcard2ColorButton.setBackground(
-                        colorChooser.showDialog(JPaintFrame.this, "Color picker", wildcard2ColorButton.getBackground())
+                    getWildcard2ColorButton().setBackground(colorChooser.showDialog(JPaintFrame.this, "Color picker", getWildcard2ColorButton().getBackground())
                     );
                 } else if(SwingUtilities.isLeftMouseButton(e)) {
-                    setSelectedColorButton(wildcard2ColorButton);
+                    setSelectedColorButton(getWildcard2ColorButton());
                 }
             }
         });
@@ -285,11 +462,10 @@ public class JPaintFrame extends JFrame {
             @Override
             public void mousePressed(MouseEvent e) {
                 if(SwingUtilities.isRightMouseButton(e)) {
-                    wildcard3ColorButton.setBackground(
-                        colorChooser.showDialog(JPaintFrame.this, "Color picker", wildcard3ColorButton.getBackground())
+                    getWildcard3ColorButton().setBackground(colorChooser.showDialog(JPaintFrame.this, "Color picker", getWildcard3ColorButton().getBackground())
                     );
                 } else if(SwingUtilities.isLeftMouseButton(e)) {
-                    setSelectedColorButton(wildcard3ColorButton);
+                    setSelectedColorButton(getWildcard3ColorButton());
                 }
             }
         });
@@ -324,15 +500,6 @@ public class JPaintFrame extends JFrame {
         brushRadiusSlider.addChangeListener(brushRadiusAction);
         
         return brushRadiusSlider;
-    }
-
-    /**
-     * Returns the canvas element of the window. Returns null if it has none.
-     *
-     * @return the canvas element of the window.
-     */
-    public CanvasPanel getCanvas() {
-        return canvas;
     }
 
     // MOVE TO LOGIC 
@@ -519,21 +686,21 @@ public class JPaintFrame extends JFrame {
         pencilAction = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                setSelectedToolButton(pencilUtilityButton, GlobalConstants.PaintTool.PENCIL);
+                setSelectedToolButton(getPencilUtilityButton(), GlobalConstants.PaintTool.PENCIL);
             }
         };
         
         brushAction = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                setSelectedToolButton(brushUtilityButton, GlobalConstants.PaintTool.BRUSH);
+                setSelectedToolButton(getBrushUtilityButton(), GlobalConstants.PaintTool.BRUSH);
             }
         };
         
         eraserAction = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                setSelectedToolButton(eraserUtilityButton, GlobalConstants.PaintTool.ERASER);
+                setSelectedToolButton(getEraserUtilityButton(), GlobalConstants.PaintTool.ERASER);
             }
         };
 
@@ -541,7 +708,7 @@ public class JPaintFrame extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent ae) {
-                setSelectedToolButton(rectangleUtilityButton, GlobalConstants.PaintTool.RECTANGLE);
+                setSelectedToolButton(getRectangleUtilityButton(), GlobalConstants.PaintTool.RECTANGLE);
             }
         };
 
@@ -549,14 +716,14 @@ public class JPaintFrame extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent ae) {
-                setSelectedToolButton(circleUtilityButton, GlobalConstants.PaintTool.CIRCLE);
+                setSelectedToolButton(getCircleUtilityButton(), GlobalConstants.PaintTool.CIRCLE);
             }
         };
 
         lineAction = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                setSelectedToolButton(lineUtilityButton, GlobalConstants.PaintTool.LINE);
+                setSelectedToolButton(getLineUtilityButton(), GlobalConstants.PaintTool.LINE);
             }
         };
         
@@ -573,35 +740,35 @@ public class JPaintFrame extends JFrame {
         colorBlackAction = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                setSelectedColorButton(blackButton);
+                setSelectedColorButton(getBlackButton());
             }
         };
         
         colorRedAction = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                setSelectedColorButton(redButton);
+                setSelectedColorButton(getRedButton());
             }
         };
 
         colorBlueAction = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                setSelectedColorButton(blueButton);
+                setSelectedColorButton(getBlueButton());
             }
         };
 
         colorYellowAction = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                setSelectedColorButton(yellowButton);
+                setSelectedColorButton(getYellowButton());
             }
         };
 
         colorGreenAction = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                setSelectedColorButton(greenButton);
+                setSelectedColorButton(getGreenButton());
             }
         };
         
@@ -612,7 +779,7 @@ public class JPaintFrame extends JFrame {
                 if(!source.getValueIsAdjusting()){
                     brushRadius = (int)source.getValue();
                     if(canvas != null){
-                        canvas.setBrushRadius(brushRadius);
+                        canvas.setBrushRadius(getBrushRadius());
                     }
                 }
             }
