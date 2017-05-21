@@ -503,7 +503,7 @@ public class JPaintFrame extends JFrame {
     }
 
     // MOVE TO LOGIC 
-    private void createDrawableCanvas() {
+    private void createDrawableCanvas(String title) {
 
         if (getCanvas() != null) {
             int createCanvasConfirmation = JOptionPane.showConfirmDialog(null, CLEAR_IMAGE_WINDOW_MESSAGE, CLEAR_IMAGE_WINDOW_TITLE, JOptionPane.YES_NO_OPTION);
@@ -512,11 +512,11 @@ public class JPaintFrame extends JFrame {
             }
         }
 
-        imageTitle = JOptionPane.showInputDialog(IMAGE_NAME_MESSAGE);
+        imageTitle = title;
         try {
             if (imageTitle.equals("")) {
                 JOptionPane.showMessageDialog(this, "Please enter a valid name");
-                createDrawableCanvas();
+                createDrawableCanvas(JOptionPane.showInputDialog(IMAGE_NAME_MESSAGE));
             }
         } catch(NullPointerException npe){
             return;
@@ -650,7 +650,7 @@ public class JPaintFrame extends JFrame {
         createCanvas = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                createDrawableCanvas();
+                createDrawableCanvas(JOptionPane.showInputDialog(IMAGE_NAME_MESSAGE));
             }
         };
 
