@@ -20,7 +20,7 @@ import javax.swing.filechooser.*;
  * and extends the java.swing.JFrame class for simple implementation.
  *
  * @author Bálint Fazekas
- * @version 0.1
+ * @version 1.1
  */
 public class JPaintFrame extends JFrame {
 
@@ -90,166 +90,333 @@ public class JPaintFrame extends JFrame {
         return canvas;
     }
     
+    /**
+     * Returns the currently selected brush radius in pixels.
+     * @return brush radius in pixels (integers)
+     */
     public int getBrushRadius() {
         return brushRadius;
     }
 
+    /**
+     * Returns the Pencil button entity.
+     * @return pencil button
+     */
     public JButton getPencilUtilityButton() {
         return pencilUtilityButton;
     }
 
+    /**
+     * Returns the Utility button entity.
+     * @return utility button
+     */
     public JButton getBrushUtilityButton() {
         return brushUtilityButton;
     }
 
+    /**
+     * Returns the Eraser button entity.
+     * @return eraser button
+     */
     public JButton getEraserUtilityButton() {
         return eraserUtilityButton;
     }
 
+    /**
+     * Returns the Rectangle drawing button entity.
+     * @return rectangle button
+     */
     public JButton getRectangleUtilityButton() {
         return rectangleUtilityButton;
     }
 
+    /**
+     * Returns the Circle drawing button entity.
+     * @return circle button
+     */
     public JButton getCircleUtilityButton() {
         return circleUtilityButton;
     }
-
+ 
+    /**
+     * Returns the Line drawing button entity.
+     * @return line button
+     */
     public JButton getLineUtilityButton() {
         return lineUtilityButton;
     }
 
+    /**
+     * Returns the Black color button entity.
+     * @return black button
+     */
     public JButton getBlackButton() {
         return blackButton;
     }
 
+    /**
+     * Returns the Red color button entity.
+     * @return red button
+     */
     public JButton getRedButton() {
         return redButton;
     }
 
+    /**
+     * Returns the Blue color button entity.
+     * @return blue button
+     */
     public JButton getBlueButton() {
         return blueButton;
     }
 
+    /**
+     * Returns the Yellow color button entity.
+     * @return yellow button
+     */
     public JButton getYellowButton() {
         return yellowButton;
     }
 
+    /**
+     * Returns the Green color button entity.
+     * @return green button
+     */
     public JButton getGreenButton() {
         return greenButton;
     }
 
+    /**
+     * Returns the first custom color button entity.
+     * @return first custom color button
+     */
     public JButton getWildcard1ColorButton() {
         return wildcard1ColorButton;
     }
 
+    /**
+     * Returns the second custom color button entity.
+     * @return second custom color button
+     */
     public JButton getWildcard2ColorButton() {
         return wildcard2ColorButton;
     }
 
+    /**
+     * Returns the third custom color button entity.
+     * @return third custom color button
+     */
     public JButton getWildcard3ColorButton() {
         return wildcard3ColorButton;
     }
 
+    /**
+     * Returns the title of the image, which was given by the user upon 
+     * the creation of a new canvas. 
+     * @return image title
+     */
     public String getImageTitle() {
         return imageTitle;
     }
 
+    /**
+     * Returns the label of the JPaintFrame window. By default, its
+     * text is set to "JPaint". When a new canvas is created, the new 
+     * given name is displayed in this label. 
+     * @return frame header
+     */
     public JLabel getFrameHeader() {
         return frameHeader;
     }
 
+    /**
+     * Returns the 'Clear canvas' menu item.
+     * @return JMenut item
+     */
     public JMenuItem getClearCanvasMenuItem() {
         return clearCanvasMenuItem;
     }
 
+    /**
+     * Returns the 'Save image' menu item. 
+     * @return JMenu item
+     */
     public JMenuItem getSaveImageMenuItem() {
         return saveImageMenuItem;
     }
 
+    /**
+     * Returns the 'Close image' menu item.
+     * @return JMenu item
+     */
     public JMenuItem getCloseImageMenuItem() {
         return closeImageMenuItem;
     }
 
+    /**
+     * Returns the undo utility button entity.
+     * @return undo button
+     */
     public JButton getUndoUtilityButton() {
         return undoUtilityButton;
     }
 
+    /**
+     * Returns the canvas creator action listener. 
+     * @return canvas creation action listener
+     */
     public ActionListener getCreateCanvas() {
         return createCanvas;
     }
 
+    /**
+     * Returns the clear canvas action listener. 
+     * @return clear canvas action listener
+     */
     public ActionListener getClearCanvas() {
         return clearCanvas;
     }
 
+    /**
+     * Returns the save image action listener. 
+     * @return save image action listener
+     */
     public ActionListener getSaveImage() {
         return saveImage;
     }
 
+    /**
+     * Returns the close image action listener. 
+     * @return close image action listener
+     */
     public ActionListener getCloseImage() {
         return closeImage;
     }
 
+    /**
+     * Returns the close window action listener. 
+     * @return close window action listener
+     */
     public ActionListener getCloseWindow() {
         return closeWindow;
     }
 
+    /**
+     * Returns the pencil utility tool action listener. 
+     * @return pencil tool action listener
+     */
     public ActionListener getPencilAction() {
         return pencilAction;
     }
 
+    /**
+     * Returns the brush utility tool action listener. 
+     * @return brush tool action listener
+     */
     public ActionListener getBrushAction() {
         return brushAction;
     }
 
+    /**
+     * Returns the eraser utility tool action listener. 
+     * @return eraser tool action listener
+     */
     public ActionListener getEraserAction() {
         return eraserAction;
     }
 
+    /**
+     * Returns the rectangle drawing utility tool action listener. 
+     * @return rectangle tool action listener
+     */
     public ActionListener getRectangleAction() {
         return rectangleAction;
     }
 
+    /**
+     * Returns the circle drawing utility tool action listener. 
+     * @return circle tool action listener
+     */
     public ActionListener getCircleAction() {
         return circleAction;
     }
 
+    /**
+     * Returns the straight line drawing utility tool action listener. 
+     * @return straight line tool action listener
+     */
     public ActionListener getLineAction() {
         return lineAction;
     }
 
+    /**
+     * Returns the undo action listener. 
+     * @return undo action listener
+     */
     public ActionListener getUndoAction() {
         return undoAction;
     }
 
+    /**
+     * Returns the brush radius action listener. 
+     * @return brush radius action listener
+     */
     public ChangeListener getBrushRadiusAction() {
         return brushRadiusAction;
     }
 
+    /**
+     * Returns the black color action listener. 
+     * @return black color action listener
+     */
     public ActionListener getColorBlackAction() {
         return colorBlackAction;
     }
 
+    /**
+     * Returns the red color action listener. 
+     * @return red color action listener
+     */
     public ActionListener getColorRedAction() {
         return colorRedAction;
     }
 
+    /**
+     * Returns the blue color action listener. 
+     * @return blue color action listener
+     */
     public ActionListener getColorBlueAction() {
         return colorBlueAction;
     }
 
+    /**
+     * Returns the yellow color action listener. 
+     * @return yellow color action listener
+     */
     public ActionListener getColorYellowAction() {
         return colorYellowAction;
     }
 
+    /**
+     * Returns the green color action listener. 
+     * @return green color action listener
+     */
     public ActionListener getColorGreenAction() {
         return colorGreenAction;
     }
 
+    /**
+     * Returns the custom color button entity. 
+     * @return custom color button entity
+     */
     public JButton getSelectedColorButton() {
         return selectedColorButton;
     }
 
+    /**
+     * Returns the currently selected utility tool button entity. 
+     * @return currently selected tool button entity
+     */
     public JButton getSelectedToolButton() {
         return selectedToolButton;
     }
@@ -286,6 +453,9 @@ public class JPaintFrame extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
+    /**
+     * Sets up the menu items of the main window of the JPaint application.
+     */
     private void setMenu() {
         JMenuBar menuBar = new JMenuBar();
         JMenu jpaintMenu = new JMenu(MENU_TEXT);
@@ -321,6 +491,11 @@ public class JPaintFrame extends JFrame {
         setJMenuBar(menuBar);
     }
 
+    /**
+     * Sets up the header of the JPaint main window. The header consists of a
+     * JLabel, where the title of the canvas is displayed. If there is no 
+     * open canvas, then "JPaint" is displayed.
+     */
     private void setPageStart() {
         JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         frameHeader.setText(imageTitle);
@@ -334,6 +509,10 @@ public class JPaintFrame extends JFrame {
         add(panel, BorderLayout.PAGE_START);
     }
 
+    /**
+     * Sets up the space for the image canvas in the main window of the 
+     * JPain application.
+     */
     private void setPageCenter() {
         JPanel canvasHolder = new JPanel(new FlowLayout(FlowLayout.CENTER));
         canvasHolder.setBackground(Color.DARK_GRAY);
@@ -341,6 +520,11 @@ public class JPaintFrame extends JFrame {
         add(canvasHolder, BorderLayout.CENTER);
     }
 
+    /**
+     * Sets up the space and position of the utility buttons on the left side of
+     * JPaint's main window. The buttons are disabled by default. They are only 
+     * enabled when there is an open canvas in the main window. 
+     */
     private void setTools() {
         JPanel utilitiesPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         JPanel utilityButtonHolder = new JPanel(new GridLayout(0, 1, 5, 5));
@@ -395,6 +579,10 @@ public class JPaintFrame extends JFrame {
         add(utilitiesPanel, BorderLayout.WEST);
     }
 
+    /**
+     * Sets the default and custom color buttons of the bottom of the main 
+     * window. 
+     */
     private void setColorButtons() {
         JPanel colorsPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         JColorChooser colorChooser = new JColorChooser();
@@ -482,6 +670,12 @@ public class JPaintFrame extends JFrame {
         add(colorsPanel, BorderLayout.PAGE_END);
     }
     
+    /**
+     * Sets and positions a slider on the bottom of the main window, beside the 
+     * color selection buttons. Returns the slider. The value of the slider sets 
+     * the radius of the brush drawing tool.
+     * @return JSlider brush tool radius
+     */
     private JSlider brushRadiusSliderCreator(){
         JSlider brushRadiusSlider = new JSlider(JSlider.HORIZONTAL, 
                                                 BRUSH_RADIUS_MIN, 
@@ -498,7 +692,11 @@ public class JPaintFrame extends JFrame {
         return brushRadiusSlider;
     }
 
-    // MOVE TO LOGIC 
+    /**
+     * Creates and positions a canvas which can be used as a drawing surface.
+     * Sets the title of the image in the image header. 
+     * @param title 
+     */
     private void createDrawableCanvas(String title) {
 
         if (getCanvas() != null) {
@@ -538,6 +736,10 @@ public class JPaintFrame extends JFrame {
         revalidate();
     }
 
+    /**
+     * Clears the canvas of its contents by replacing the currently used canvas
+     * with a new one. 
+     */
     private void clearCanvas() {
         if (canvas != null) {
             int clearCanvasConfirmation = JOptionPane.showConfirmDialog(null, CLEAR_IMAGE_WINDOW_MESSAGE, CLEAR_IMAGE_WINDOW_TITLE, JOptionPane.YES_NO_OPTION);
@@ -551,6 +753,9 @@ public class JPaintFrame extends JFrame {
         }
     }
 
+    /**
+     * Closes a currently open canvas. 
+     */
     private void closeCanvas() {
         if (canvas != null) {
             if (imageTitle != "JPaint") {
@@ -579,6 +784,11 @@ public class JPaintFrame extends JFrame {
         }
     }
     
+    /**
+     * Sets the currently selected custom color button. Changes the attributes 
+     * of the button given in the parameter.
+     * @param selectedColorButton 
+     */
     private void setSelectedColorButton(JButton selectedColorButton) {
         //Resets previously selected border
         if(this.selectedColorButton != null)
@@ -591,6 +801,12 @@ public class JPaintFrame extends JFrame {
         }
     }
     
+    /**
+     * Changes the attributes of a button based on which tool is selected by 
+     * the user. 
+     * @param selectedToolButton
+     * @param selectedTool 
+     */
     private void setSelectedToolButton(JButton selectedToolButton, GlobalConstants.PaintTool selectedTool) {
         if(this.selectedToolButton != null)
             this.selectedToolButton.setBorder(BorderFactory.createLineBorder(Color.GRAY));
@@ -602,21 +818,10 @@ public class JPaintFrame extends JFrame {
         }   
     }
 
-    private void drawWithPencil() {
-        //this is only for testing
-        BufferedImage mae;
-        try {
-            mae = ImageIO.read(new File("src/hu/elte/pu/jpaint/gui/constants/mae.png"));
-            JLabel maePic = new JLabel(new ImageIcon(mae));
-            canvas.add(maePic);
-        } catch (IOException ex) {
-            System.out.println(ex);
-        } catch (NullPointerException ex) {
-            System.out.println("there is no canvas to draw on :c");
-        }
-        revalidate();
-    }
-
+    /**
+     * Saves the contents of the canvas on the hard drive. Both the name and 
+     * the format of the image can be customized. 
+     */
     private void saveImage() {
         if (canvas != null) {
 
@@ -641,7 +846,10 @@ public class JPaintFrame extends JFrame {
         }
     }
 
-    // ACTION LISTENERS
+    /**
+     * Connects the action listeners with their corresponding GUI component on 
+     * the JPaint main window. 
+     */
     private void hookActionListeners() {
         createCanvas = new ActionListener() {
             @Override

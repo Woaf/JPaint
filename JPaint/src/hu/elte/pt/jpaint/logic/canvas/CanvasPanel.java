@@ -21,7 +21,7 @@ public class CanvasPanel extends JPanel implements MouseMotionListener, MouseLis
         
     /**
      * Constructs and initializes a canvas object, where the drawables will be 
-     * painted. Adds levent listeners for the mouse and its motion.
+     * painted. Adds event listeners for the mouse and its motion.
      *
      * @param selectedColor drawing Color.
      * @param brushRadius brush's or eraser's radius.

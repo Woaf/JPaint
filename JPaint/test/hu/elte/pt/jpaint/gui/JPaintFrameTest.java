@@ -35,7 +35,7 @@ public class JPaintFrameTest {
     }
     
     /**
-     * Initalizing JPaintFrame in setUpClass(), so it can be accessed from every tests.
+     * Initializing JPaintFrame in setUpClass(), so it can be accessed from every tests.
      */
     @BeforeClass
     public static void setUpClass() {
@@ -65,7 +65,7 @@ public class JPaintFrameTest {
     }
     
     /**
-     * Test the availablility of the buttons.
+     * Test the availability of the buttons.
      */
     @Test
     public void testBeforeCanvasButtonAvailability() {

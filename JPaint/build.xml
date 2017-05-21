@@ -9,7 +9,7 @@
     <property name="build.dir" value="jpaint-build"/>
     <property name="classes.dir" value="${build.dir}/classes"/>
     <property name="jar.dir" value="jpaint-disrtibute"/>
-    <property name="doc.dir" value="${build.dir}/doc"/>
+    <property name="doc.dir" value="${jar.dir}/doc"/>
     
     <property name="main-class" value="hu.elte.pt.jpaint.JPaint"/>
     
@@ -60,7 +60,6 @@
     </target>
         
     <target name="run">
-        <echo message="i am run"/>
         <java jar="${jar.dir}/${ant.project.name}.jar"/>
     </target>
     

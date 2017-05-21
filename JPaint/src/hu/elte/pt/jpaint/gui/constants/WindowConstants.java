@@ -8,6 +8,11 @@ package hu.elte.pt.jpaint.gui.constants;
 
 import java.awt.*;
 
+/**
+ * Defines the static constant variables that are used in the graphical user 
+ * interface of the JPaint main window.
+ * @author Bálint
+ */
 public class WindowConstants {
 
     public static final int WINDOW_WIDTH = 1000;
